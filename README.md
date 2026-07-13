@@ -72,6 +72,13 @@ This Chrome extension operates as the **GTA VICELAUNCHER Cloud Play Launcher** t
 
 ---
 
+## 📧 Contact & Support
+
+For any support, feature requests, bug reports, or general inquiries, please feel free to reach out via email:
+👉 **[rajmodigwl@gmail.com](mailto:rajmodigwl@gmail.com)**
+
+---
+
 ## 🛡️ License
 
 This project is open-source and available under the MIT License.
