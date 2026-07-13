@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GTA VI Cloud Live Event & YouTube Launch - GTA VICELAUNCHER</title>
-  <meta name="description" content="Join our upcoming YouTube channel launch and historic GTA VI live stream event. 5 PS5 setup, 1 host play, and cloud gaming access slots for selected viewers!">
+  <title>PLAY GTA VI FREE ON LAUNCH DAY - GTA VICELAUNCHER</title>
+  <meta name="description" content="Your ultimate chance to play GTA VI FREE on Launch Day! No PS5 console needed. Join our YouTube launch event and win 1-hour cloud play slots!">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
   
   <style>
@@ -16,9 +16,9 @@
       --accent-yellow: #ffcc00;
       --text-main: #ffffff;
       --text-muted: #c2c2cf;
-      --shadow-pink: 0 0 10px rgba(255, 0, 85, 0.4);
-      --shadow-cyan: 0 0 10px rgba(0, 240, 255, 0.4);
-      --shadow-yellow: 0 0 10px rgba(255, 204, 0, 0.4);
+      --shadow-pink: 0 0 15px rgba(255, 0, 85, 0.6);
+      --shadow-cyan: 0 0 15px rgba(0, 240, 255, 0.6);
+      --shadow-yellow: 0 0 20px rgba(255, 204, 0, 0.7);
     }
 
     * {
@@ -33,6 +33,29 @@
       font-family: 'Rajdhani', sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
+    }
+
+    /* Giant Flashing Hype Ticker Banner */
+    .hype-ticker {
+      background: linear-gradient(90deg, #ff0055 0%, #ffcc00 50%, #ff0055 100%);
+      color: #000000;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 13px;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 10px 0;
+      letter-spacing: 2px;
+      box-shadow: 0 4px 15px rgba(255, 0, 85, 0.5);
+      position: relative;
+      z-index: 1001;
+      animation: tickerPulse 1.5s infinite;
+    }
+
+    @keyframes tickerPulse {
+      0% { filter: brightness(1); }
+      50% { filter: brightness(1.2); }
+      100% { filter: brightness(1); }
     }
 
     /* Fixed Slideshow Background Elements with Will-Change support */
@@ -151,46 +174,71 @@
       opacity: 1;
     }
 
-    /* Event Header */
-    .event-header {
-      text-align: center;
-      padding: 60px 0 30px 0;
-    }
-
-    .event-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 40px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #ffffff;
-      margin-bottom: 15px;
-      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
-    }
-
-    .event-badge {
-      display: inline-block;
-      border: 1px solid var(--accent-pink);
+    /* Giant Hype Section */
+    .hype-billboard {
+      background: linear-gradient(135deg, rgba(255, 0, 85, 0.2) 0%, rgba(17, 9, 44, 0.9) 100%);
+      border: 2.5px solid var(--accent-pink);
       box-shadow: var(--shadow-pink);
-      color: var(--accent-pink);
-      font-weight: bold;
-      font-size: 12px;
-      padding: 4px 14px;
-      border-radius: 20px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 20px;
-      background: rgba(255, 0, 85, 0.05);
+      border-radius: 12px;
+      padding: 50px 30px;
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 60px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(5px);
     }
 
-    .event-intro {
-      font-size: 18px;
-      color: #ffe8f4;
+    .hype-badge {
+      display: inline-block;
+      background: var(--accent-yellow);
+      color: #000000;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 14px;
+      padding: 6px 20px;
+      border-radius: 30px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 25px;
+      box-shadow: var(--shadow-yellow);
+      animation: badgeBlink 1s infinite alternate;
+    }
+
+    @keyframes badgeBlink {
+      0% { transform: scale(1); box-shadow: 0 0 10px #ffcc00; }
+      100% { transform: scale(1.05); box-shadow: 0 0 25px #ff0055; }
+    }
+
+    .hype-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 52px;
+      font-weight: 900;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      text-shadow: 0 0 20px rgba(255, 0, 85, 0.8), 0 0 40px rgba(0, 240, 255, 0.4);
+    }
+
+    .hype-subheadline {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--accent-cyan);
+      text-shadow: var(--shadow-cyan);
+      margin-bottom: 25px;
       max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-      line-height: 1.6;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hype-text {
+      font-size: 17px;
+      color: #ffe5f2;
+      max-width: 850px;
+      margin: 0 auto 30px auto;
+      line-height: 1.7;
     }
 
     /* Stream Setup Card Showcase */
@@ -224,10 +272,6 @@
       transition: transform 0.5s ease;
     }
 
-    .setup-card:hover .setup-image-container img {
-      transform: scale(1.02);
-    }
-
     /* Channel Teaser Banner */
     .channel-teaser {
       background: linear-gradient(90deg, rgba(22, 10, 54, 0.9) 0%, rgba(47, 18, 84, 0.9) 50%, rgba(22, 10, 54, 0.9) 100%);
@@ -246,13 +290,6 @@
       color: #ffffff;
       margin-bottom: 10px;
       letter-spacing: 1px;
-    }
-
-    .channel-teaser p {
-      color: var(--text-muted);
-      max-width: 650px;
-      margin: 0 auto 20px auto;
-      font-size: 15px;
     }
 
     .channel-status {
@@ -607,6 +644,11 @@
 </head>
 <body>
 
+  <!-- Giant Flashing Hype Ticker Banner -->
+  <div class="hype-ticker">
+    🔥 Launch Day Exclusive: Play GTA VI Free on Day 1 • No Console Needed • 100% Browser Streamed 🔥
+  </div>
+
   <!-- Rotating Backgrounds (Slideshow) -->
   <div id="vcc-bg-slideshow-1" class="vcc-bg-slide" style="background-image: url('images/bg1.jpg'); opacity: 1;"></div>
   <div id="vcc-bg-slideshow-2" class="vcc-bg-slide" style="background-image: url('images/bg2.jpg'); opacity: 0;"></div>
@@ -622,12 +664,13 @@
 
   <div class="container" style="position: relative; z-index: 10;">
     
-    <!-- Event Header -->
-    <section class="event-header vcc-3d-scroll-item">
-      <div class="event-badge">Upcoming Cloud Event</div>
-      <h1 class="event-title">GTA VI Cloud Stream Event</h1>
-      <p class="event-intro">
-        Get ready for a historic interactive gaming event. We are launching an official gaming channel and hosting a live stream where viewers can play GTA VI directly from their laptops using cloud streaming!
+    <!-- Giant Hype Billboard -->
+    <section class="hype-billboard vcc-3d-scroll-item">
+      <div class="hype-badge">Historic Launch Day Access</div>
+      <h1 class="hype-title">PLAY GTA VI FREE<br>ON LAUNCH DAY!</h1>
+      <p class="hype-subheadline">No PS5 Console Needed • Streamed Direct To Your Laptop</p>
+      <p class="hype-text">
+        Skip the lines and bypass the $500 console price tag! We are hosting a live launch day tournament on YouTube, routing real-time play feeds from 5 PlayStation 5 setups inside our studio directly into a secure cloud streaming gateway. Win slots to play GTA VI on release day for FREE!
       </p>
     </section>
 

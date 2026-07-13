@@ -35,13 +35,36 @@
       overflow-x: hidden;
     }
 
+    /* Giant Flashing Hype Ticker Banner */
+    .hype-ticker {
+      background: linear-gradient(90deg, #ff0055 0%, #ffcc00 50%, #ff0055 100%);
+      color: #000000;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 13px;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 10px 0;
+      letter-spacing: 2px;
+      box-shadow: 0 4px 15px rgba(255, 0, 85, 0.5);
+      position: relative;
+      z-index: 1001;
+      animation: tickerPulse 1.5s infinite;
+    }
+
+    @keyframes tickerPulse {
+      0% { filter: brightness(1); }
+      50% { filter: brightness(1.2); }
+      100% { filter: brightness(1); }
+    }
+
     /* Fixed Slideshow Background Elements with Will-Change support */
     .vcc-bg-slide {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
-      height: 120vh; /* slightly taller to cover parallax translation overflow */
+      height: 120vh;
       z-index: -3;
       background-size: cover;
       background-position: center;
@@ -140,11 +163,11 @@
       text-shadow: var(--shadow-cyan);
     }
 
-    /* 3D Motion Scroll Reveal Animation Styles */
+    /* 3D Motion Scroll Reveal Animation Classes */
     .vcc-3d-scroll-item {
       opacity: 0;
       transform: perspective(1000px) rotateX(12deg) translateY(35px) scale(0.96);
-      transition: opacity 0.8s ease-out, transform 0.1s linear; /* quick linear transform transition for smooth scrolling micro-tilts */
+      transition: opacity 0.8s ease-out, transform 0.1s linear;
       will-change: transform, opacity;
     }
 
@@ -251,6 +274,19 @@
       background: #ff0055;
       color: white;
       box-shadow: 0 0 20px rgba(255, 0, 85, 0.8);
+    }
+
+    /* Flashing Pulsing Launch Day Button */
+    .btn-gta-cloud-event {
+      border: 2px solid #ffcc00 !important;
+      color: #ffcc00 !important;
+      box-shadow: 0 0 15px rgba(255, 204, 0, 0.4) !important;
+      animation: hypeBtnPulse 1.5s infinite alternate !important;
+    }
+
+    @keyframes hypeBtnPulse {
+      0% { transform: scale(1); box-shadow: 0 0 10px #ffcc00, 0 0 5px #ff0055; }
+      100% { transform: scale(1.04); box-shadow: 0 0 25px #ff0055, 0 0 15px #00f0ff; }
     }
 
     /* Game Running Line - Workflow Timeline */
@@ -627,6 +663,11 @@
 </head>
 <body>
 
+  <!-- Giant Flashing Hype Ticker Banner -->
+  <div class="hype-ticker">
+    🔥 Launch Day Exclusive: Play GTA VI Free on Day 1 • No Console Needed • 100% Browser Streamed 🔥
+  </div>
+
   <!-- Rotating Backgrounds (Slideshow) -->
   <div id="vcc-bg-slideshow-1" class="vcc-bg-slide" style="background-image: url('images/bg1.jpg'); opacity: 1;"></div>
   <div id="vcc-bg-slideshow-2" class="vcc-bg-slide" style="background-image: url('images/bg2.jpg'); opacity: 0;"></div>
@@ -659,7 +700,7 @@
         <a href="vice-city-cloud-mobile-trainer.zip" class="btn btn-pink" download>Download GTA VICELAUNCHER ZIP</a>
         <a href="https://quenq.com/play/9fa6d40cbabd8bfc416b30fa/" class="btn btn-cyan" target="_blank">Launch Game Online</a>
         <a href="gta_legacy.html" class="btn btn-gta-legacy">GTA Legacy</a>
-        <a href="live_event.html" class="btn" style="border: 2px solid #ffcc00; color: #ffcc00; box-shadow: 0 0 10px rgba(255, 204, 0, 0.3);">GTA VI Cloud Event</a>
+        <a href="live_event.html" class="btn btn-gta-cloud-event">GTA VI Cloud Event</a>
       </div>
     </section>
 
@@ -970,7 +1011,7 @@
       currentBgIndex = nextIndex;
     }
 
-    // Fade background image every 7 seconds
+    // Cycle backgrounds every 7 seconds
     setInterval(rotateBackground, 7000);
   </script>
 </body>
