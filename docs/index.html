@@ -139,6 +139,18 @@
       text-shadow: var(--shadow-cyan);
     }
 
+    /* 3D Scroll Reveal Animation Classes */
+    .vcc-3d-scroll-item {
+      opacity: 0;
+      transform: perspective(1000px) rotateX(12deg) translateY(35px) scale(0.96);
+      transition: transform 0.8s cubic-bezier(0.1, 0.9, 0.25, 1), opacity 0.8s ease-out;
+    }
+
+    .vcc-3d-scroll-item.visible {
+      opacity: 1;
+      transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
+    }
+
     /* Hero Section */
     .hero-section {
       text-align: center;
@@ -225,6 +237,19 @@
       background: var(--accent-cyan);
       color: var(--bg-dark);
       box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
+    }
+
+    .btn-gta-legacy {
+      background: transparent;
+      color: #ff0055;
+      border: 2px solid #ff0055;
+      box-shadow: var(--shadow-pink);
+    }
+
+    .btn-gta-legacy:hover {
+      background: #ff0055;
+      color: white;
+      box-shadow: 0 0 20px rgba(255, 0, 85, 0.8);
     }
 
     /* Game Running Line - Workflow Timeline */
@@ -615,7 +640,7 @@
         <li><a href="#features">Launcher Features</a></li>
         <li><a href="#cheats">Cheats List</a></li>
         <li><a href="#install">How to Play</a></li>
-        <li><a href="#faq">FAQ</a></li>
+        <li><a href="gta_legacy.html" style="color: var(--accent-cyan); text-shadow: var(--shadow-cyan);">GTA Legacy</a></li>
       </ul>
     </div>
   </header>
@@ -623,7 +648,7 @@
   <div class="container" style="position: relative; z-index: 10;">
     
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="hero-section vcc-3d-scroll-item">
       <div class="hero-badge">GTA Vice City Cloud Play Launcher</div>
       <h1 class="hero-title">GTA Vercetti OS</h1>
       <p class="hero-subtitle">
@@ -631,12 +656,13 @@
       </p>
       <div class="cta-container">
         <a href="vice-city-cloud-mobile-trainer.zip" class="btn btn-pink" download>Download GTA Vercetti OS ZIP</a>
-        <a href="https://quenq.com/play/9fa6d40cbabd8bfc416b30fa/" class="btn btn-cyan" target="_blank">Launch Game Online Now</a>
+        <a href="https://quenq.com/play/9fa6d40cbabd8bfc416b30fa/" class="btn btn-cyan" target="_blank">Launch Game Online</a>
+        <a href="gta_legacy.html" class="btn btn-gta-legacy">GTA Legacy & Tribute</a>
       </div>
     </section>
 
     <!-- Game Running Line Section (Gameplay Workflow pipeline) -->
-    <section id="running-line" class="running-line-section">
+    <section id="running-line" class="running-line-section vcc-3d-scroll-item">
       <h2 class="section-title">Cloud Gameplay Pipeline</h2>
       <div class="timeline-container">
         
@@ -668,7 +694,7 @@
     </section>
 
     <!-- Branding Banner -->
-    <section class="branding-banner">
+    <section class="branding-banner vcc-3d-scroll-item">
       <h2>Complete Cloud Play & Mod Engine</h2>
       <p>Bypass heavy files and setup issues. Launch the emulator directly in Chrome, trigger the virtual smartphone mod on top of the active WebGL canvas, and experience the game in high performance.</p>
       <div class="branding-highlight">POWERED BY MAUXX AI</div>
@@ -676,58 +702,58 @@
 
     <!-- Features -->
     <section id="features" style="padding-top: 40px;">
-      <h2 class="section-title">Launcher Features & Architecture</h2>
+      <h2 class="section-title vcc-3d-scroll-item">Launcher Features & Architecture</h2>
       <div class="features-grid">
         
-        <div class="feature-card">
+        <div class="feature-card vcc-3d-scroll-item">
           <div class="feature-icon">🚀</div>
           <h3 class="feature-name">Instant Web Launcher</h3>
           <p class="feature-desc">Loads and runs the cloud-based game client instantly inside Chrome's WebAssembly container. Zero file downloading or local file structure installation needed.</p>
         </div>
 
-        <div class="feature-card">
+        <div class="feature-card vcc-3d-scroll-item">
           <div class="feature-icon">📱</div>
           <h3 class="feature-name">In-Game Mobile Mod</h3>
           <p class="feature-desc">Spawns a detailed silver-blue smartphone overlay matching the GTA V layout. Equipped with digital clock syncing, battery signals, and sound synthesizers.</p>
         </div>
 
-        <div class="feature-card">
+        <div class="feature-card vcc-3d-scroll-item">
           <div class="feature-icon">📋</div>
           <h3 class="feature-name">2D App Icon Grid</h3>
           <p class="feature-desc">Toggle the viewport between list scrolling and a 2D grid. The grid organizes cheats into visually clean icons navigable in all directions (Left/Right/Up/Down).</p>
         </div>
 
-        <div class="feature-card">
+        <div class="feature-card vcc-3d-scroll-item">
           <div class="feature-icon">📸</div>
           <h3 class="feature-name">Canvas Frame Capturer</h3>
           <p class="feature-desc">Extracts render frames directly from the active game canvas, generating immediate PNG image downloads for wallpaper snaps.</p>
         </div>
 
-        <div class="feature-card">
+        <div class="feature-card vcc-3d-scroll-item">
           <div class="feature-icon">📹</div>
           <h3 class="feature-name">MediaStream Video Recorder</h3>
           <p class="feature-desc">Records screen runs into high-quality compressed WebM files using local MediaRecorder drivers. Displays a blinking red 🔴 REC warning in the phone top bar.</p>
         </div>
 
-        <div class="feature-card">
+        <div class="feature-card vcc-3d-scroll-item">
           <div class="feature-icon">🔊</div>
           <h3 class="feature-name">DTMF Audio Synthesis</h3>
           <p class="feature-desc">Raw oscillators play retro dial tone key beeps, transition slides, and camera shutter sounds synthesized on the fly via the Web Audio API.</p>
         </div>
 
-        <div class="feature-card">
+        <div class="feature-card vcc-3d-scroll-item">
           <div class="feature-icon">⚡</div>
           <h3 class="feature-name">Capture-Phase Listeners</h3>
           <p class="feature-desc">Binds keyboard handlers directly to the window and document during the event capture phase to bypass emulator input swallow filters.</p>
         </div>
 
-        <div class="feature-card">
+        <div class="feature-card vcc-3d-scroll-item">
           <div class="feature-icon">🔒</div>
           <h3 class="feature-name">Iframe & Sandbox Safe</h3>
           <p class="feature-desc">Auto-relocates overlay frames inside sandboxed origins (like quenq.com) and native full-screen elements without breaking DOM bounds.</p>
         </div>
 
-        <div class="feature-card">
+        <div class="feature-card vcc-3d-scroll-item">
           <div class="feature-icon">💨</div>
           <h3 class="feature-name">60FPS GPU Optimization</h3>
           <p class="feature-desc">Refined stylesheet layers remove backdrop image blur properties, protecting the GPU from framerate drops and maintaining maximum 3D rendering speeds.</p>
@@ -737,7 +763,7 @@
     </section>
 
     <!-- Cheat Search Finder -->
-    <section id="cheats" class="cheat-section">
+    <section id="cheats" class="cheat-section vcc-3d-scroll-item">
       <h2 class="section-title">Launcher Built-in Mod Cheats</h2>
       <div class="cheat-search-container">
         <input type="text" id="search-box" placeholder="Filter cheats... (e.g. health, weapons, panzer)" oninput="filterCheats()">
@@ -749,22 +775,22 @@
 
     <!-- How to Play -->
     <section id="install" class="install-section">
-      <h2 class="section-title">How to Setup and Launch</h2>
+      <h2 class="section-title vcc-3d-scroll-item">How to Setup and Launch</h2>
       <div class="step-list">
         
-        <div class="step-card">
+        <div class="step-card vcc-3d-scroll-item">
           <div class="step-num">01</div>
           <h3 class="step-title">Get Launcher Extension</h3>
           <p class="step-desc">Click "Download Launcher Extension" to get the ZIP. Extract it on your laptop (Windows, Mac, or Linux).</p>
         </div>
 
-        <div class="step-card">
+        <div class="step-card vcc-3d-scroll-item">
           <div class="step-num">02</div>
           <h3 class="step-title">Load into Chrome</h3>
           <p class="step-desc">Open <code>chrome://extensions/</code>, enable Developer Mode (top-right), and click "Load unpacked" (top-left) selecting the folder.</p>
         </div>
 
-        <div class="step-card">
+        <div class="step-card vcc-3d-scroll-item">
           <div class="step-num">03</div>
           <h3 class="step-title">Launch Game Online</h3>
           <p class="step-desc">Navigate to the game URL, click inside the active window to focus, and press the Up Arrow key to open your in-game smartphone mod!</p>
@@ -775,9 +801,9 @@
 
     <!-- FAQ Accordion -->
     <section id="faq" class="faq-section">
-      <h2 class="section-title">Frequently Asked Questions</h2>
+      <h2 class="section-title vcc-3d-scroll-item">Frequently Asked Questions</h2>
       
-      <div class="faq-item">
+      <div class="faq-item vcc-3d-scroll-item">
         <div class="faq-question" onclick="toggleFaq(this)">
           Does this web launcher require game downloads?
           <span class="faq-toggle-icon">+</span>
@@ -787,7 +813,7 @@
         </div>
       </div>
 
-      <div class="faq-item">
+      <div class="faq-item vcc-3d-scroll-item">
         <div class="faq-question" onclick="toggleFaq(this)">
           How do I operate the virtual smartphone mod?
           <span class="faq-toggle-icon">+</span>
@@ -797,7 +823,7 @@
         </div>
       </div>
 
-      <div class="faq-item">
+      <div class="faq-item vcc-3d-scroll-item">
         <div class="faq-question" onclick="toggleFaq(this)">
           Is this project free and safe?
           <span class="faq-toggle-icon">+</span>
@@ -820,6 +846,24 @@
   </footer>
 
   <script>
+    // 3D Scroll Reveal Intersection Observer
+    document.addEventListener("DOMContentLoaded", () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+      });
+
+      document.querySelectorAll(".vcc-3d-scroll-item").forEach(item => {
+        observer.observe(item);
+      });
+    });
+
     const CHEATS_DATA = [
       { name: "Full Health", code: "aspirine" },
       { name: "Full Armor", code: "preciousprotection" },
