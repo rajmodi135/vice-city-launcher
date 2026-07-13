@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Vice City Web Trainer Pro</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <div class="logo-area">
+      <h1>★ VICE TRAINER ★</h1>
+      <p class="subtitle">GTA Vice City Web Edition</p>
+    </div>
+    <div class="header-controls">
+      <div id="connection-status" class="status-indicator">
+        <span class="status-dot pulsing"></span>
+        <span id="status-text" class="status-text">DISCONNECTED</span>
+      </div>
+      <div class="sfx-control">
+        <span class="sfx-label">SFX</span>
+        <label class="switch">
+          <input type="checkbox" id="sfx-checkbox" checked>
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="launcher-section">
+    <button id="launch-btn" class="neon-btn cyan-btn">LAUNCH GAME IN THIS WINDOW</button>
+  </div>
+
+  <div class="tabs-container">
+    <button class="tab-btn active" data-category="all">ALL</button>
+    <button class="tab-btn" data-category="player">PLAYER</button>
+    <button class="tab-btn" data-category="weapons">WEAPONS</button>
+    <button class="tab-btn" data-category="vehicles">VEHICLES</button>
+    <button class="tab-btn" data-category="world">WORLD</button>
+  </div>
+
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Search cheats... (e.g. health, tank)" autocomplete="off">
+  </div>
+
+  <div class="cheats-container">
+    <div class="cheat-grid-header">
+      <span class="col-action">Cheat Action</span>
+      <span class="col-shortcut">Hotkey / Code</span>
+      <span class="col-trigger">Send</span>
+    </div>
+    <div id="cheats-list" class="cheats-list">
+      <!-- Generated dynamically in popup.js -->
+    </div>
+  </div>
+
+  <div class="info-banner">
+    PRO-TIP: Press <span>`</span> (Backtick) or <span>F1</span> inside the game screen to toggle the Left Overlay Menu!
+  </div>
+
+  <div class="footer">
+    GTA VICE CITY WEB TRAINER PRO &bull; PRODUCTION STABLE<br>
+    <span style="font-weight: bold; color: #ff0055; text-shadow: 0 0 4px rgba(255,0,85,0.4);">POWERED BY MAUXX AI</span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
