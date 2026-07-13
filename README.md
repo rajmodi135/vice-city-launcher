@@ -58,7 +58,7 @@ This Chrome extension operates as the **GTA VICELAUNCHER Cloud Play Launcher** t
 
 1. **Clone or Download the Repository**:
    ```bash
-   git clone https://github.com/rajmodi135/vice-city-cloud-mobile-trainer.git
+   git clone https://github.com/rajmodi135/vice-city-launcher.git
    ```
    *(Or download the launcher ZIP directly from our GitHub Pages website)*
 2. **Load Unpacked Extension in Google Chrome**:
