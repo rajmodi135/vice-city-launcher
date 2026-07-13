@@ -3,594 +3,387 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GTA Legacy & Tribute - GTA VICELAUNCHER</title>
-  <meta name="description" content="Explore the legacy of GTA games from 2D classics to GTA VI. Showing love to Rockstar Games for their hard work. Powered by Mauxx AI.">
-  
-  <!-- Font Preconnect Performance Optimizations -->
+  <title>GTA Legacy — The Grand Theft Auto Universe | GTA VICELAUNCHER</title>
+  <meta name="description" content="A heartfelt tribute to Rockstar Games' legendary GTA franchise — from the 1997 original to GTA VI. Explore the full evolution of the Grand Theft Auto universe.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-  
-  <!-- Preload primary background image for LCP paint -->
-  <link rel="preload" as="image" href="images/bg1.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="images/bg3.jpg">
+  <link rel="stylesheet" href="shared.css">
 
   <style>
-    :root {
-      --bg-dark: #070314;
-      --bg-panel: rgba(17, 9, 44, 0.85);
-      --accent-pink: #ff0055;
-      --accent-cyan: #00f0ff;
-      --text-main: #ffffff;
-      --text-muted: #c2c2cf;
-      --shadow-pink: 0 0 10px rgba(255, 0, 85, 0.4);
-      --shadow-cyan: 0 0 10px rgba(0, 240, 255, 0.4);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      font-family: 'Rajdhani', sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* Frozen Fixed Background Slide Elements */
-    .vcc-bg-slide {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -3;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      transition: opacity 1.5s ease-in-out;
-      pointer-events: none;
-      will-change: opacity;
-      background-color: var(--bg-dark);
-    }
-
-    /* Gradient overlay dim mask for high-contrast text safety */
-    .vcc-bg-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -2;
-      background: radial-gradient(circle, rgba(7, 3, 20, 0.35) 0%, rgba(7, 3, 20, 0.9) 85%);
-      pointer-events: none;
-    }
-
-    /* Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: var(--bg-dark);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: var(--accent-pink);
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--accent-cyan);
-    }
-
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 15px 0;
-    }
-
-    header {
-      border-bottom: 2px solid var(--accent-pink);
-      box-shadow: 0 4px 20px rgba(255, 0, 85, 0.15);
-      background: rgba(11, 5, 28, 0.8);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .nav-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 0;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    .logo-brand {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(20px, 4vw, 24px);
-      font-weight: 900;
-      font-style: italic;
-      color: var(--accent-pink);
-      text-shadow: var(--shadow-pink);
-      text-decoration: none;
-      letter-spacing: 1px;
-    }
-
-    .logo-brand span {
-      color: var(--accent-cyan);
-      text-shadow: var(--shadow-cyan);
-    }
-
-    .back-btn {
-      font-family: 'Orbitron', sans-serif;
-      color: var(--accent-cyan);
-      border: 1px solid var(--accent-cyan);
-      background: rgba(0, 240, 255, 0.05);
-      padding: 8px 18px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: bold;
-      text-transform: uppercase;
-      font-size: 13px;
-      box-shadow: var(--shadow-cyan);
-      transition: all 0.2s;
-    }
-
-    .back-btn:hover {
-      background: var(--accent-cyan);
-      color: var(--bg-dark);
-      box-shadow: 0 0 15px rgba(0, 240, 255, 0.8);
-    }
-
-    /* 3D Motion Scroll Reveal Animation Styles with Hardware Acceleration */
-    .vcc-3d-scroll-item {
-      opacity: 0;
-      transform: perspective(1000px) rotateX(12deg) translateY(35px) scale(0.96);
-      transition: opacity 0.8s ease-out;
-      will-change: transform, opacity;
-      content-visibility: auto;
-    }
-
-    .vcc-3d-scroll-item.visible {
-      opacity: 1;
-    }
-
-    /* Tribute Block styling */
-    .tribute-header {
+    /* ── CINEMATIC HERO ── */
+    .legacy-hero {
+      padding: clamp(60px,12vw,120px) 0 clamp(40px,6vw,70px);
       text-align: center;
-      padding: clamp(30px, 6vw, 60px) 0 30px 0;
+    }
+    .legacy-hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-display); font-size: 10px;
+      text-transform: uppercase; letter-spacing: 3px;
+      color: var(--pink); margin-bottom: 22px;
+      padding: 6px 18px; border: 1px solid rgba(255,0,85,.35);
+      border-radius: var(--radius-pill); background: rgba(255,0,85,.07);
+    }
+    .legacy-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px,9vw,88px);
+      font-weight: 900; font-style: italic; line-height: 1.0;
+      background: linear-gradient(135deg, #fff 0%, #ff0055 40%, #00f0ff 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; letter-spacing: -1px;
+      margin-bottom: 22px;
+    }
+    .legacy-hero-quote {
+      background: rgba(0,0,0,.35);
+      border-left: 4px solid var(--pink);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 22px 28px; max-width: 780px; margin: 0 auto 36px;
+      font-size: clamp(15px,2vw,18px); color: #ffe5f2;
+      line-height: 1.8; font-style: italic; text-align: left;
+    }
+    .legacy-hero-quote cite {
+      display: block; margin-top: 12px;
+      font-size: 12px; color: var(--text-muted); font-style: normal;
+      text-transform: uppercase; letter-spacing: 2px;
     }
 
-    .tribute-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(28px, 6vw, 40px);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #ffffff;
-      margin-bottom: 15px;
-      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
-      line-height: 1.1;
-    }
-
-    .tribute-intro {
-      font-size: clamp(15px, 2vw, 18px);
-      color: #ffe8f4;
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-      line-height: 1.6;
-      background: rgba(255, 0, 85, 0.1);
-      border: 1px solid var(--accent-pink);
-      box-shadow: var(--shadow-pink);
-      padding: 20px;
-      border-radius: 8px;
-      backdrop-filter: blur(5px);
-    }
-
-    /* GTA VI Feature Poster card */
-    .gta6-showcase-section {
-      margin: 50px 0 80px 0;
-    }
-
-    .gta6-card {
+    /* ── TRIBUTE SHOWCASE ── */
+    .tribute-section { margin-bottom: 80px; }
+    .tribute-card {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
       background: var(--bg-panel);
-      border: 2px solid var(--accent-pink);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: var(--shadow-pink);
-      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,0,85,.2);
+      border-radius: var(--radius-lg);
+      overflow: hidden; backdrop-filter: blur(10px);
     }
+    @media(max-width:768px) { .tribute-card { grid-template-columns: 1fr; } }
+    .tribute-img-wrap { overflow: hidden; min-height: 300px; }
+    .tribute-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+    .tribute-img-wrap:hover img { transform: scale(1.04); }
+    .tribute-info { padding: clamp(24px,4vw,48px); display: flex; flex-direction: column; justify-content: center; }
+    .tribute-badge { margin-bottom: 16px; }
+    .tribute-headline { font-family: var(--font-display); font-size: clamp(20px,3.5vw,30px); font-weight: 900; margin-bottom: 16px; line-height: 1.2; }
+    .tribute-body { font-size: 15px; color: var(--text-soft); line-height: 1.8; margin-bottom: 20px; }
 
-    .gta6-image-container {
-      width: 100%;
-      height: auto;
-      max-height: 520px;
-      overflow: hidden;
-      border-bottom: 2px solid var(--accent-pink);
-      background: #000;
+    /* ── HORIZONTAL TIMELINE ── */
+    .timeline-section { margin-bottom: 80px; }
+    .h-timeline {
+      display: flex; gap: 0; overflow-x: auto; padding-bottom: 16px;
+      scrollbar-width: thin; scrollbar-color: var(--pink) transparent;
     }
+    .h-timeline::-webkit-scrollbar { height: 5px; }
+    .h-timeline::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 4px; }
+    .h-timeline-item {
+      min-width: 180px; flex-shrink: 0;
+      position: relative; padding: 0 0 0 30px;
+    }
+    .h-timeline-item::before {
+      content: ''; position: absolute;
+      left: 0; top: 24px; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--pink), var(--cyan));
+    }
+    .h-timeline-item::after {
+      content: ''; position: absolute;
+      left: 0; top: 18px;
+      width: 14px; height: 14px;
+      border-radius: 50%; border: 2px solid var(--cyan);
+      background: var(--bg-base); z-index: 1;
+    }
+    .h-timeline-item:last-child::before { right: 100%; }
+    .h-t-year { font-family: var(--font-display); font-size: 11px; color: var(--cyan); letter-spacing: 2px; margin: 44px 0 6px; }
+    .h-t-name { font-family: var(--font-display); font-size: 12px; font-weight: 900; color: #fff; margin-bottom: 4px; }
+    .h-t-emoji { font-size: 22px; display: block; margin-bottom: 5px; }
+    .h-t-desc { font-size: 11px; color: var(--text-muted); line-height: 1.55; max-width: 160px; }
 
-    .gta6-image-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.5s ease;
-    }
+    /* ── LEGACY CARDS GRID ── */
+    .legacy-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 20px; }
+    .game-card { padding: 26px 22px; }
+    .game-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .game-title  { font-family: var(--font-display); font-size: clamp(13px,1.7vw,15px); font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+    .game-year   { font-family: var(--font-display); font-size: 12px; color: var(--cyan); font-weight: 700; border: 1px solid rgba(0,240,255,.3); padding: 3px 10px; border-radius: 4px; flex-shrink: 0; }
+    .game-icon   { font-size: 36px; margin-bottom: 12px; display: block; }
+    .game-desc   { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; }
 
-    .gta6-card:hover .gta6-image-container img {
-      transform: scale(1.02);
+    /* Feature card for GTA VI special */
+    .game-card-special {
+      background: linear-gradient(135deg, rgba(255,0,85,.12) 0%, rgba(0,240,255,.06) 100%);
+      border: 2px solid var(--yellow) !important;
+      box-shadow: 0 0 30px rgba(255,204,0,.15);
     }
+    .game-card-special:hover { box-shadow: 0 0 50px rgba(255,204,0,.25) !important; }
 
-    .gta6-info {
-      padding: clamp(20px, 4vw, 35px);
-      text-align: center;
+    /* ── ROCKSTAR TRIBUTE ── */
+    .rockstar-section {
+      background: var(--bg-panel); border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--radius-lg); padding: clamp(28px,5vw,55px);
+      text-align: center; margin-bottom: 80px; backdrop-filter: blur(10px);
     }
-
-    .gta6-badge {
-      display: inline-block;
-      border: 1px solid var(--accent-cyan);
-      box-shadow: var(--shadow-cyan);
-      color: var(--accent-cyan);
-      font-weight: bold;
-      font-size: 11px;
-      padding: 3px 10px;
-      border-radius: 20px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 15px;
-      background: rgba(0, 240, 255, 0.05);
-    }
-
-    .gta6-headline {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(20px, 3.5vw, 28px);
-      font-weight: 900;
-      color: var(--accent-cyan);
-      margin-bottom: 10px;
-      text-shadow: var(--shadow-cyan);
-    }
-
-    .gta6-body {
-      font-size: 15px;
-      color: var(--text-muted);
-      max-width: 750px;
-      margin: 0 auto;
-    }
-
-    /* Legacy games timeline list */
-    .section-title {
-      font-family: 'Orbitron', sans-serif;
-      text-align: center;
-      font-size: clamp(24px, 4vw, 32px);
-      margin-bottom: 40px;
-      text-transform: uppercase;
-      position: relative;
-    }
-
-    .section-title::after {
-      content: '';
-      display: block;
-      width: 60px;
-      height: 3px;
-      background: var(--accent-pink);
-      margin: 10px auto 0 auto;
-      box-shadow: var(--shadow-pink);
-    }
-
-    .legacy-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 25px;
-      margin-bottom: 80px;
-    }
-
-    .game-card {
-      background: var(--bg-panel);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px;
-      padding: 25px;
-      transition: all 0.25s ease-out;
-      backdrop-filter: blur(5px);
-    }
-
-    .game-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent-cyan);
-      box-shadow: var(--shadow-cyan);
-    }
-
-    .game-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      padding-bottom: 8px;
-    }
-
-    .game-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-main);
-      max-width: 70%;
-    }
-
-    .game-year {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 12px;
-      font-weight: bold;
-      color: var(--accent-pink);
-      text-shadow: var(--shadow-pink);
-    }
-
-    .game-icon {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .game-desc {
-      font-size: 13.5px;
-      color: var(--text-muted);
-    }
-
-    /* Footer */
-    footer {
-      border-top: 2px solid var(--accent-pink);
-      background: #05020f;
-      padding: 40px 0;
-      text-align: center;
-      position: relative;
-      z-index: 10;
-    }
-
-    .footer-text {
-      color: var(--text-muted);
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-
-    .footer-branding {
-      font-family: 'Orbitron', sans-serif;
-      color: var(--accent-pink);
-      font-weight: bold;
-      letter-spacing: 1px;
-      font-size: 15px;
-    }
-
-    @media (max-width: 768px) {
-      .nav-bar {
-        justify-content: center;
-        text-align: center;
-      }
-      .nav-bar div {
-        justify-content: center;
-        width: 100%;
-        margin-top: 10px;
-      }
-    }
+    .rockstar-logo { font-size: 60px; margin-bottom: 18px; display: block; }
+    .rockstar-title { font-family: var(--font-display); font-size: clamp(18px,3vw,26px); font-weight: 900; margin-bottom: 14px; color: var(--yellow); }
+    .rockstar-desc { font-size: 15px; color: var(--text-soft); max-width: 720px; margin: 0 auto; line-height: 1.8; }
   </style>
 </head>
 <body>
 
-  <!-- Rotating Backgrounds (Slideshow) -->
-  <div id="vcc-bg-slideshow-1" class="vcc-bg-slide" style="background-image: url('images/bg1.jpg'); opacity: 1;"></div>
-  <div id="vcc-bg-slideshow-2" class="vcc-bg-slide" style="background-image: url('images/bg2.jpg'); opacity: 0;"></div>
-  <div class="vcc-bg-overlay"></div>
+  <!-- Hype Ticker -->
+  <div class="hype-ticker">🎮 GTA Legacy — Tribute to Rockstar Games | GTA VI — The Most Anticipated Game Ever Made 🎮</div>
+
+  <!-- Fixed Frozen Background -->
+  <div id="vcc-bg-slideshow-1" class="bg-slide" style="background-image:url('images/bg3.jpg');opacity:1;"></div>
+  <div id="vcc-bg-slideshow-2" class="bg-slide" style="background-image:url('images/bg1.jpg');opacity:0;"></div>
+  <div class="bg-overlay"></div>
 
   <!-- Navigation -->
-  <header>
-    <div class="container nav-bar">
-      <a href="index.html" class="logo-brand">GTA<span>VICELAUNCHER</span></a>
-      <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-        <a href="live_event.html" class="back-btn" style="border-color: var(--accent-pink); color: var(--accent-pink); box-shadow: var(--shadow-pink);">🔥 Live Event</a>
-        <a href="download.html" class="back-btn" style="border-color: var(--accent-yellow); color: var(--accent-yellow); box-shadow: 0 0 10px rgba(255,204,0,0.5);">⬇️ Downloads</a>
-        <a href="index.html" class="back-btn">← Back to Launcher</a>
-      </div>
+  <header class="site-header">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">GTA<span>VICELAUNCHER</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gta_legacy.html" class="active nav-hot">GTA Legacy</a></li>
+        <li><a href="live_event.html" class="nav-hot">🔥 Live Event</a></li>
+        <li><a href="download.html" class="nav-gold">⬇️ Downloads</a></li>
+      </ul>
     </div>
   </header>
 
-  <div class="container" style="position: relative; z-index: 10;">
-    
-    <!-- Tribute Header -->
-    <section class="tribute-header vcc-3d-scroll-item">
-      <h1 class="tribute-title">Grand Theft Auto Legacy</h1>
-      <p class="tribute-intro">
+  <div class="page-body">
+
+    <!-- ══ CINEMATIC HERO ══ -->
+    <section class="legacy-hero reveal">
+      <div class="legacy-hero-eyebrow">🎮 25+ Years of Open World Mastery</div>
+      <h1 class="legacy-hero-title">Grand Theft Auto<br>Legacy</h1>
+      <div class="legacy-hero-quote">
         "A heartfelt thank you to Rockstar Games for working so hard over the past decades to build these legendary open worlds. Your games have defined generations, sparked endless creativity, and made our digital worlds so amazing!"
-      </p>
+        <cite>— GTA VICELAUNCHER Team</cite>
+      </div>
+      <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
+        <a href="live_event.html" class="btn btn-pink">🔥 Join Live Event</a>
+        <a href="download.html" class="btn btn-cyan">⬇️ Get Vice City</a>
+      </div>
     </section>
 
-    <!-- GTA VI Tribute Section -->
-    <section class="gta6-showcase-section vcc-3d-scroll-item">
-      <div class="gta6-card">
-        <div class="gta6-image-container">
-          <img src="images/gta_vi_tribute.jpg" alt="GTA VI Tribute Poster" loading="lazy">
+    <!-- ══ GTA VI TRIBUTE ══ -->
+    <section class="tribute-section reveal">
+      <div class="tribute-card">
+        <div class="tribute-img-wrap">
+          <img src="images/gta_vi_tribute.jpg" alt="GTA VI Tribute — Vice City Returns" loading="lazy">
         </div>
-        <div class="gta6-info">
-          <div class="gta6-badge">Vice City Returns</div>
-          <h2 class="gta6-headline">Showing Love for GTA VI</h2>
-          <p class="gta6-body">
-            Anticipation is at an all-time high as we prepare to return to next-gen Vice City! The breathtaking neon shorelines, tropical beach horizons, and dual-protagonist mechanics of Lucia and Jason are set to make history. This project is a tribute to the legacy that started it all.
-          </p>
+        <div class="tribute-info">
+          <div class="tribute-badge">
+            <span class="badge badge-yellow">🌅 Vice City Returns</span>
+          </div>
+          <h2 class="tribute-headline">Showing Love for GTA VI</h2>
+          <p class="tribute-body">Anticipation is at an all-time high as we prepare to return to next-gen Vice City! The breathtaking neon shorelines, tropical beach horizons, and dual-protagonist mechanics of Lucia and Jason are set to make history. This project is a tribute to the legacy that started it all.</p>
+          <a href="live_event.html" class="btn btn-yellow" style="align-self:flex-start;">🔥 Win Free Launch Day Access</a>
         </div>
       </div>
     </section>
 
-    <!-- Legacy Timeline Grid -->
-    <section>
-      <h2 class="section-title vcc-3d-scroll-item">Evolution of the GTA Universe</h2>
+    <!-- ══ HORIZONTAL ERA TIMELINE ══ -->
+    <section class="timeline-section reveal section">
+      <h2 class="sec-title">The GTA Era Timeline</h2>
+      <div class="h-timeline">
+        <div class="h-timeline-item">
+          <div class="h-t-year">1997</div>
+          <span class="h-t-emoji">🚕</span>
+          <div class="h-t-name">Grand Theft Auto</div>
+          <p class="h-t-desc">Top-down sandbox that started the revolution</p>
+        </div>
+        <div class="h-timeline-item">
+          <div class="h-t-year">1999</div>
+          <span class="h-t-emoji">⚡</span>
+          <div class="h-t-name">GTA 2</div>
+          <p class="h-t-desc">Futuristic city with gang respect systems</p>
+        </div>
+        <div class="h-timeline-item">
+          <div class="h-t-year">2001</div>
+          <span class="h-t-emoji">🌆</span>
+          <div class="h-t-name">GTA III</div>
+          <p class="h-t-desc">The 3D revolution — Liberty City born</p>
+        </div>
+        <div class="h-timeline-item" style="--c:var(--pink)">
+          <div class="h-t-year">2002</div>
+          <span class="h-t-emoji">🌴</span>
+          <div class="h-t-name">Vice City</div>
+          <p class="h-t-desc">80s neon paradise — Tommy Vercetti's empire</p>
+        </div>
+        <div class="h-timeline-item">
+          <div class="h-t-year">2004</div>
+          <span class="h-t-emoji">🚲</span>
+          <div class="h-t-name">San Andreas</div>
+          <p class="h-t-desc">Huge 3-city state — CJ and Grove Street</p>
+        </div>
+        <div class="h-timeline-item">
+          <div class="h-t-year">2008</div>
+          <span class="h-t-emoji">🌉</span>
+          <div class="h-t-name">GTA IV</div>
+          <p class="h-t-desc">Gritty realism — Niko Bellic's dark journey</p>
+        </div>
+        <div class="h-timeline-item">
+          <div class="h-t-year">2013</div>
+          <span class="h-t-emoji">💵</span>
+          <div class="h-t-name">GTA V</div>
+          <p class="h-t-desc">Record-breaking masterpiece + GTA Online</p>
+        </div>
+        <div class="h-timeline-item">
+          <div class="h-t-year">TBA 2025</div>
+          <span class="h-t-emoji">🌅</span>
+          <div class="h-t-name">GTA VI</div>
+          <p class="h-t-desc">Lucia & Jason — Next-gen Vice City returns</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ EVOLUTION CARDS ══ -->
+    <section class="reveal section">
+      <h2 class="sec-title">Evolution of the GTA Universe</h2>
       <div class="legacy-grid">
-        
-        <div class="game-card vcc-3d-scroll-item">
+
+        <div class="glass-card game-card accent-cyan hover-cyan reveal">
           <div class="game-header">
             <h3 class="game-title">Grand Theft Auto</h3>
             <span class="game-year">1997</span>
           </div>
-          <div class="game-icon">🚕</div>
-          <p class="game-desc">The retro 2D top-down legacy that started it all, introducing high-speed carjacking runs and sandbox freedom across Liberty City, San Andreas, and Vice City.</p>
+          <span class="game-icon">🚕</span>
+          <p class="game-desc">The retro 2D top-down legacy that started it all — introducing high-speed carjacking runs and sandbox freedom across Liberty City, San Andreas, and Vice City.</p>
         </div>
 
-        <div class="game-card vcc-3d-scroll-item">
+        <div class="glass-card game-card accent-pink hover-pink reveal">
           <div class="game-header">
             <h3 class="game-title">Grand Theft Auto 2</h3>
             <span class="game-year">1999</span>
           </div>
-          <div class="game-icon">⚡</div>
+          <span class="game-icon">⚡</span>
           <p class="game-desc">Set in a futuristic metropolis, this top-down classic introduced the respect meter, forcing players to manage reputation with rival gang syndicates.</p>
         </div>
 
-        <div class="game-card vcc-3d-scroll-item">
+        <div class="glass-card game-card accent-yellow hover-yellow reveal">
           <div class="game-header">
             <h3 class="game-title">Grand Theft Auto III</h3>
             <span class="game-year">2001</span>
           </div>
-          <div class="game-icon">🌆</div>
+          <span class="game-icon">🌆</span>
           <p class="game-desc">The revolutionary shift to full 3D. Liberty City became a living, breathing sandbox, setting the standard for all modern open-world video games.</p>
         </div>
 
-        <div class="game-card vcc-3d-scroll-item">
+        <div class="glass-card game-card accent-pink hover-pink reveal">
           <div class="game-header">
             <h3 class="game-title">GTA: Vice City</h3>
             <span class="game-year">2002</span>
           </div>
-          <div class="game-icon">🌴</div>
-          <p class="game-desc">Tommy Vercetti's rise to power in a retro 80s neon paradise. Styled with legendary synthwave radio stations and Miami hotel backdrops.</p>
+          <span class="game-icon">🌴</span>
+          <p class="game-desc">Tommy Vercetti's rise to power in a retro 80s neon paradise. Styled with legendary synthwave radio stations and iconic Miami hotel backdrops.</p>
         </div>
 
-        <div class="game-card vcc-3d-scroll-item">
+        <div class="glass-card game-card accent-green hover-green reveal">
           <div class="game-header">
             <h3 class="game-title">GTA: San Andreas</h3>
             <span class="game-year">2004</span>
           </div>
-          <div class="game-icon">🚲</div>
+          <span class="game-icon">🚲</span>
           <p class="game-desc">CJ, Grove Street, and a massive state containing Los Santos, San Fierro, and Las Venturas. Set a benchmark in character customization and map scale.</p>
         </div>
 
-        <div class="game-card vcc-3d-scroll-item">
+        <div class="glass-card game-card accent-cyan hover-cyan reveal">
           <div class="game-header">
             <h3 class="game-title">Grand Theft Auto IV</h3>
             <span class="game-year">2008</span>
           </div>
-          <div class="game-icon">🌉</div>
-          <p class="game-desc">Niko Bellic and the dark, gritty realism of modern Liberty City. Features cutting-edge physics and mature narrative storytelling.</p>
+          <span class="game-icon">🌉</span>
+          <p class="game-desc">Niko Bellic and the dark, gritty realism of modern Liberty City. Featuring cutting-edge physics and mature narrative storytelling.</p>
         </div>
 
-        <div class="game-card vcc-3d-scroll-item">
+        <div class="glass-card game-card accent-pink hover-pink reveal">
           <div class="game-header">
             <h3 class="game-title">Grand Theft Auto V</h3>
             <span class="game-year">2013</span>
           </div>
-          <div class="game-icon">💵</div>
-          <p class="game-desc">The record-breaking masterpiece featuring three playable characters (Michael, Franklin, Trevor) in modern Los Santos, and the massive GTA Online universe.</p>
+          <span class="game-icon">💵</span>
+          <p class="game-desc">The record-breaking masterpiece featuring three playable characters — Michael, Franklin, Trevor — in modern Los Santos, and the massive GTA Online universe.</p>
         </div>
 
-        <div class="game-card vcc-3d-scroll-item">
+        <div class="glass-card game-card game-card-special reveal">
           <div class="game-header">
-            <h3 class="game-title">Grand Theft Auto VI</h3>
-            <span class="game-year">TBA</span>
+            <h3 class="game-title" style="color:var(--yellow)">Grand Theft Auto VI</h3>
+            <span class="game-year" style="color:var(--yellow);border-color:rgba(255,204,0,.4)">🔥 TBA</span>
           </div>
-          <div class="game-icon">🌅</div>
-          <p class="game-desc">Lucia, Jason, and the next-generation return to Leonida/Vice City. Set to push the boundaries of immersive gaming tech to their limits.</p>
+          <span class="game-icon">🌅</span>
+          <p class="game-desc">Lucia, Jason, and the next-generation return to Leonida/Vice City. Set to push the boundaries of immersive gaming technology to their limits. <strong style="color:var(--yellow)">Win free launch day access on our Live Event page!</strong></p>
         </div>
 
       </div>
     </section>
 
+    <!-- ══ ROCKSTAR TRIBUTE ══ -->
+    <section class="rockstar-section reveal section">
+      <span class="rockstar-logo">⭐</span>
+      <h2 class="rockstar-title">Thank You, Rockstar Games</h2>
+      <p class="rockstar-desc">
+        Over 25 years of extraordinary game development. From the streets of Liberty City to the neon highways of Vice City, the sprawling state of San Andreas, and now the return to next-gen Leonida — Rockstar Games has consistently redefined what a video game can be. This entire project exists because of the legacy and love you've built. Thank you for the memories, the immersion, and the worlds that never get old.
+      </p>
+    </section>
+
   </div>
 
-  <!-- Footer with Support Email Integration -->
-  <footer>
-    <div class="container">
-      <p class="footer-text">GTA VICELAUNCHER - Cloud Play Launcher • Open Source Project</p>
-      <p class="footer-text" style="margin-top: 8px; font-size: 13px; color: var(--accent-cyan);">
-        Need help? Contact support: <a href="mailto:rajmodigwl@gmail.com" style="color: var(--accent-cyan); text-decoration: underline; font-weight: bold;">rajmodigwl@gmail.com</a>
-      </p>
-      <div class="footer-branding" style="margin-top: 12px;">POWERED BY MAUXX AI</div>
+  <!-- ══ FOOTER ══ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-name">GTA<span>VICELAUNCHER</span></div>
+          <p class="footer-tagline">A tribute to the Grand Theft Auto franchise and Rockstar Games. Cloud play launcher for GTA Vice City — completely free.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Explore</div>
+          <ul class="footer-links">
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="download.html">⬇️ Download Vice City</a></li>
+            <li><a href="live_event.html">🔥 GTA VI Live Event</a></li>
+            <li><a href="gta_legacy.html">📖 GTA Legacy</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Support</div>
+          <ul class="footer-links">
+            <li><a href="mailto:rajmodigwl@gmail.com">📧 rajmodigwl@gmail.com</a></li>
+            <li><a href="https://github.com/rajmodi135/vice-city-launcher" target="_blank">GitHub</a></li>
+          </ul>
+          <div class="info-tip" style="margin-top:16px;font-size:12px;">Contact us: <strong>rajmodigwl@gmail.com</strong></div>
+        </div>
+      </div>
+      <hr class="footer-divider">
+      <div class="footer-bottom">
+        <span>© 2025 GTA VICELAUNCHER — Open Source MIT License</span>
+        <span class="footer-support">Support: <a href="mailto:rajmodigwl@gmail.com">rajmodigwl@gmail.com</a></span>
+        <span class="footer-powered">⚡ Powered by Mauxx AI</span>
+      </div>
     </div>
   </footer>
 
+  <!-- Back to Top -->
+  <button class="back-to-top" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
   <script>
-    // 3D Scroll Reveal Intersection Observer (Fades in once)
-    document.addEventListener("DOMContentLoaded", () => {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      }, {
-        threshold: 0.05,
-        rootMargin: "0px 0px -20px 0px"
-      });
+    // Scroll Reveal
+    const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible'); }), { threshold: 0.05 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-      document.querySelectorAll(".vcc-3d-scroll-item").forEach(item => {
-        observer.observe(item);
-      });
-    });
+    // Back to Top
+    const btt = document.getElementById('btt');
+    window.addEventListener('scroll', () => btt.classList.toggle('show', scrollY > 400), { passive: true });
 
-    // Throttled 3D Scroll Motion via requestAnimationFrame (Background parallax translations removed)
-    let ticking = false;
-    window.addEventListener("scroll", () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateScrollPhysics();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
-
-    function updateScrollPhysics() {
-      // 3D Tilt on scroll position relative to viewport center
-      const viewportHeight = window.innerHeight;
-      const scrollItems = document.querySelectorAll(".vcc-3d-scroll-item.visible");
-      
-      scrollItems.forEach(item => {
-        const rect = item.getBoundingClientRect();
-        const itemCenter = rect.top + rect.height / 2;
-        const viewCenter = viewportHeight / 2;
-        const distanceFromCenter = (itemCenter - viewCenter) / viewCenter;
-        
-        const tilt = Math.max(-12, Math.min(12, distanceFromCenter * 10));
-        const scale = Math.max(0.96, Math.min(1.04, 1 - Math.abs(distanceFromCenter) * 0.04));
-        
-        item.style.transform = `perspective(1000px) rotateX(${tilt}deg) scale(${scale}) translateZ(0)`;
-      });
+    // Background Slideshow
+    const bgImages=['images/bg3.jpg','images/bg1.jpg','images/bg2.jpg'];
+    let bgIdx=0, activeSlide=1;
+    function rotateBg(){
+      bgIdx=(bgIdx+1)%bgImages.length;
+      const s1=document.getElementById("vcc-bg-slideshow-1"), s2=document.getElementById("vcc-bg-slideshow-2");
+      if(activeSlide===1){s2.style.backgroundImage=`url('${bgImages[bgIdx]}')`;s2.style.opacity="1";s1.style.opacity="0";activeSlide=2;}
+      else{s1.style.backgroundImage=`url('${bgImages[bgIdx]}')`;s1.style.opacity="1";s2.style.opacity="0";activeSlide=1;}
     }
-
-    // Dynamic Background Rotating Slideshow
-    const bgImages = ['images/bg1.jpg', 'images/bg2.jpg', 'images/bg3.jpg'];
-    let currentBgIndex = 0;
-    let activeSlideId = 1;
-
-    function rotateBackground() {
-      const nextIndex = (currentBgIndex + 1) % bgImages.length;
-      const slide1 = document.getElementById("vcc-bg-slideshow-1");
-      const slide2 = document.getElementById("vcc-bg-slideshow-2");
-      
-      if (activeSlideId === 1) {
-        slide2.style.backgroundImage = `url('${bgImages[nextIndex]}')`;
-        slide2.style.opacity = "1";
-        slide1.style.opacity = "0";
-        activeSlideId = 2;
-      } else {
-        slide1.style.backgroundImage = `url('${bgImages[nextIndex]}')`;
-        slide1.style.opacity = "1";
-        slide2.style.opacity = "0";
-        activeSlideId = 1;
-      }
-      currentBgIndex = nextIndex;
-    }
-
-    // Cycle backgrounds every 7 seconds
-    setInterval(rotateBackground, 7000);
+    setInterval(rotateBg,7000);
   </script>
 </body>
 </html>
