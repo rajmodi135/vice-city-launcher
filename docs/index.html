@@ -6,8 +6,15 @@
   <title>GTA VICELAUNCHER - Play GTA Vice City Online Cloud Play Launcher</title>
   <meta name="description" content="Launch and play GTA Vice City online in your web browser. Free cloud launcher with built-in virtual smartphone mod, screenshots, and recording. Powered by Mauxx AI.">
   <meta name="keywords" content="play gta vice city online, gta vice city browser launcher, gta vice city download pc, gta vice city cheats, gta vice city cloud play, mauxx ai">
+  
+  <!-- Font Preconnect Performance Optimizations -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
   
+  <!-- Preload primary background image for immediate LCP paint -->
+  <link rel="preload" as="image" href="images/bg1.jpg">
+
   <style>
     :root {
       --bg-dark: #070314;
@@ -41,15 +48,18 @@
       color: #000000;
       font-family: 'Orbitron', sans-serif;
       font-weight: 900;
-      font-size: 13px;
+      font-size: clamp(10px, 1.5vw, 13px);
       text-transform: uppercase;
       text-align: center;
-      padding: 10px 0;
-      letter-spacing: 2px;
-      box-shadow: 0 4px 15px rgba(255, 0, 85, 0.5);
+      padding: 8px 10px;
+      letter-spacing: 1.5px;
+      box-shadow: 0 4px 15px rgba(255, 0, 85, 0.4);
       position: relative;
       z-index: 1001;
       animation: tickerPulse 1.5s infinite;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     @keyframes tickerPulse {
@@ -72,6 +82,7 @@
       transition: opacity 1.5s ease-in-out;
       pointer-events: none;
       will-change: transform, opacity;
+      background-color: var(--bg-dark); /* fallback background color */
     }
 
     /* Gradient overlay dim mask for high-contrast text safety */
@@ -106,7 +117,7 @@
       width: 90%;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 20px 0;
+      padding: 15px 0;
     }
 
     header {
@@ -123,12 +134,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 0;
+      padding: 12px 0;
+      flex-wrap: wrap;
+      gap: 15px;
     }
 
     .logo-brand {
       font-family: 'Orbitron', sans-serif;
-      font-size: 24px;
+      font-size: clamp(20px, 4vw, 24px);
       font-weight: 900;
       font-style: italic;
       color: var(--accent-pink);
@@ -144,15 +157,16 @@
 
     .nav-links {
       display: flex;
-      gap: 20px;
+      gap: clamp(10px, 2vw, 20px);
       list-style: none;
+      flex-wrap: wrap;
     }
 
     .nav-links a {
       color: var(--text-main);
       text-decoration: none;
       font-weight: bold;
-      font-size: 16px;
+      font-size: clamp(13px, 1.8vw, 16px);
       text-transform: uppercase;
       letter-spacing: 1px;
       transition: color 0.2s;
@@ -163,12 +177,13 @@
       text-shadow: var(--shadow-cyan);
     }
 
-    /* 3D Motion Scroll Reveal Animation Classes */
+    /* 3D Motion Scroll Reveal Animation Classes with Hardware Acceleration */
     .vcc-3d-scroll-item {
       opacity: 0;
       transform: perspective(1000px) rotateX(12deg) translateY(35px) scale(0.96);
-      transition: opacity 0.8s ease-out, transform 0.1s linear;
+      transition: opacity 0.8s ease-out; /* layout updates handled by throttled scroll engine */
       will-change: transform, opacity;
+      content-visibility: auto; /* browser rendering optimizations */
     }
 
     .vcc-3d-scroll-item.visible {
@@ -178,7 +193,7 @@
     /* Hero Section */
     .hero-section {
       text-align: center;
-      padding: 80px 0 40px 0;
+      padding: clamp(40px, 8vw, 80px) 0 40px 0;
       position: relative;
     }
 
@@ -188,7 +203,7 @@
       box-shadow: var(--shadow-cyan);
       color: var(--accent-cyan);
       font-weight: bold;
-      font-size: 12px;
+      font-size: clamp(10px, 1.5vw, 12px);
       padding: 4px 12px;
       border-radius: 20px;
       text-transform: uppercase;
@@ -199,16 +214,17 @@
 
     .hero-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: 48px;
+      font-size: clamp(28px, 6vw, 48px);
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 2px;
       margin-bottom: 15px;
       text-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
+      line-height: 1.1;
     }
 
     .hero-subtitle {
-      font-size: 18px;
+      font-size: clamp(15px, 2vw, 18px);
       color: #e2e2ec;
       max-width: 700px;
       margin: 0 auto 30px auto;
@@ -218,7 +234,7 @@
     .cta-container {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: clamp(10px, 2vw, 20px);
       flex-wrap: wrap;
       margin-bottom: 40px;
     }
@@ -226,9 +242,9 @@
     .btn {
       display: inline-block;
       font-family: 'Orbitron', sans-serif;
-      font-size: 14px;
+      font-size: clamp(11px, 1.5vw, 14px);
       font-weight: bold;
-      padding: 14px 28px;
+      padding: 12px 24px;
       border-radius: 6px;
       text-decoration: none;
       text-transform: uppercase;
@@ -341,11 +357,6 @@
       transition: all 0.3s ease-out;
     }
 
-    .timeline-step:nth-child(even) .timeline-icon {
-      border-color: var(--accent-cyan);
-      box-shadow: var(--shadow-cyan);
-    }
-
     .timeline-step:hover .timeline-icon {
       transform: scale(1.15);
     }
@@ -369,7 +380,7 @@
     .section-title {
       font-family: 'Orbitron', sans-serif;
       text-align: center;
-      font-size: 32px;
+      font-size: clamp(24px, 4vw, 32px);
       margin-bottom: 40px;
       text-transform: uppercase;
       position: relative;
@@ -387,7 +398,7 @@
 
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 30px;
       margin-bottom: 80px;
     }
@@ -396,7 +407,7 @@
       background: var(--bg-panel);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 8px;
-      padding: 30px;
+      padding: 25px;
       transition: all 0.2s ease-in-out;
       position: relative;
       overflow: hidden;
@@ -431,7 +442,7 @@
       background: linear-gradient(90deg, rgba(22, 10, 54, 0.9) 0%, rgba(47, 18, 84, 0.9) 50%, rgba(22, 10, 54, 0.9) 100%);
       border: 1.5px solid var(--accent-pink);
       border-radius: 12px;
-      padding: 40px;
+      padding: clamp(25px, 5vw, 40px);
       text-align: center;
       margin-bottom: 80px;
       box-shadow: var(--shadow-pink);
@@ -440,7 +451,7 @@
 
     .branding-banner h2 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 28px;
+      font-size: clamp(20px, 4vw, 28px);
       margin-bottom: 10px;
       letter-spacing: 1px;
     }
@@ -454,7 +465,7 @@
 
     .branding-highlight {
       font-family: 'Orbitron', sans-serif;
-      font-size: 32px;
+      font-size: clamp(24px, 5vw, 32px);
       font-weight: 900;
       color: var(--accent-pink);
       text-shadow: var(--shadow-pink);
@@ -466,7 +477,7 @@
       background: var(--bg-panel);
       border-radius: 8px;
       border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 40px;
+      padding: clamp(20px, 5vw, 40px);
       margin-bottom: 80px;
       backdrop-filter: blur(5px);
     }
@@ -497,7 +508,7 @@
 
     .cheat-list {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 15px;
     }
 
@@ -643,20 +654,45 @@
       font-size: 15px;
     }
 
-    /* Responsive */
+    /* Advanced Mobile Responsive Optimization media queries */
     @media (max-width: 768px) {
-      .hero-title {
-        font-size: 32px;
+      .nav-bar {
+        justify-content: center;
+        text-align: center;
       }
+      
+      .nav-links {
+        justify-content: center;
+        width: 100%;
+        margin-top: 10px;
+      }
+      
       .timeline-container {
         flex-direction: column;
         gap: 40px;
+        align-items: center;
+        padding-left: 20px;
       }
+      
       .timeline-container::before {
-        display: none;
+        left: 35px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        height: 100%;
       }
-      .nav-links {
-        display: none;
+      
+      .timeline-step {
+        display: flex;
+        text-align: left;
+        gap: 20px;
+        align-items: center;
+        width: 100%;
+      }
+      
+      .timeline-icon {
+        margin: 0;
+        flex-shrink: 0;
       }
     }
   </style>
@@ -711,26 +747,34 @@
         
         <div class="timeline-step">
           <div class="timeline-icon">⚡</div>
-          <h4 class="timeline-title">1. One-Click Install</h4>
-          <p class="timeline-desc">Add the lightweight launcher extension directly into Chrome in 15 seconds.</p>
+          <div>
+            <h4 class="timeline-title">1. One-Click Install</h4>
+            <p class="timeline-desc">Add the lightweight launcher extension directly into Chrome in 15 seconds.</p>
+          </div>
         </div>
 
         <div class="timeline-step">
           <div class="timeline-icon">🌐</div>
-          <h4 class="timeline-title">2. Cloud Load</h4>
-          <p class="timeline-desc">Launch the game directly from the extension popup. It loads the WebGL emulator inside the active tab.</p>
+          <div>
+            <h4 class="timeline-title">2. Cloud Load</h4>
+            <p class="timeline-desc">Launch the game directly from the extension popup. It loads the WebGL emulator inside the active tab.</p>
+          </div>
         </div>
 
         <div class="timeline-step">
           <div class="timeline-icon">📱</div>
-          <h4 class="timeline-title">3. HUD Activation</h4>
-          <p class="timeline-desc">Press the Up Arrow key inside the focused game viewport to slide up the virtual smartphone HUD.</p>
+          <div>
+            <h4 class="timeline-title">3. HUD Activation</h4>
+            <p class="timeline-desc">Press the Up Arrow key inside the focused game viewport to slide up the virtual smartphone HUD.</p>
+          </div>
         </div>
 
         <div class="timeline-step">
           <div class="timeline-icon">🎮</div>
-          <h4 class="timeline-title">4. Cheat & Mod</h4>
-          <p class="timeline-desc">Navigate cheats, snap screenshots, or record WebM video loops using only Arrow keys and Enter.</p>
+          <div>
+            <h4 class="timeline-title">4. Cheat & Mod</h4>
+            <p class="timeline-desc">Navigate cheats, snap screenshots, or record WebM video loops using only Arrow keys and Enter.</p>
+          </div>
         </div>
 
       </div>
@@ -907,15 +951,26 @@
       });
     });
 
-    // Dynamic 3D Scroll Motion & Parallax Engine
+    // Throttled 3D Scroll Motion & Parallax Engine via requestAnimationFrame
+    let ticking = false;
     window.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateScrollPhysics();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    function updateScrollPhysics() {
       const scrolled = window.pageYOffset;
       
       // Parallax Background shift
       const bg1 = document.getElementById("vcc-bg-slideshow-1");
       const bg2 = document.getElementById("vcc-bg-slideshow-2");
-      if (bg1) bg1.style.transform = `translateY(${scrolled * 0.12}px)`;
-      if (bg2) bg2.style.transform = `translateY(${scrolled * 0.12}px)`;
+      if (bg1) bg1.style.transform = `translateY(${scrolled * 0.12}px) translateZ(0)`;
+      if (bg2) bg2.style.transform = `translateY(${scrolled * 0.12}px) translateZ(0)`;
       
       // 3D Tilt on scroll position relative to viewport center
       const viewportHeight = window.innerHeight;
@@ -927,13 +982,13 @@
         const viewCenter = viewportHeight / 2;
         const distanceFromCenter = (itemCenter - viewCenter) / viewCenter;
         
-        // Tilt the card dynamically on rotateX and scale down slightly at screen edges
+        // Tilt dynamically on rotateX and scale down slightly at screen edges
         const tilt = Math.max(-12, Math.min(12, distanceFromCenter * 10));
         const scale = Math.max(0.96, Math.min(1.04, 1 - Math.abs(distanceFromCenter) * 0.04));
         
-        item.style.transform = `perspective(1000px) rotateX(${tilt}deg) scale(${scale})`;
+        item.style.transform = `perspective(1000px) rotateX(${tilt}deg) scale(${scale}) translateZ(0)`;
       });
-    });
+    }
 
     const CHEATS_DATA = [
       { name: "Full Health", code: "aspirine" },

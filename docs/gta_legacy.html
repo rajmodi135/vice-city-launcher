@@ -5,8 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GTA Legacy & Tribute - GTA VICELAUNCHER</title>
   <meta name="description" content="Explore the legacy of GTA games from 2D classics to GTA VI. Showing love to Rockstar Games for their hard work. Powered by Mauxx AI.">
+  
+  <!-- Font Preconnect Performance Optimizations -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
   
+  <!-- Preload primary background image for immediate LCP paint -->
+  <link rel="preload" as="image" href="images/bg1.jpg">
+
   <style>
     :root {
       --bg-dark: #070314;
@@ -39,7 +46,7 @@
       top: 0;
       left: 0;
       width: 100vw;
-      height: 120vh; /* slightly taller to cover parallax translation overflow */
+      height: 120vh;
       z-index: -3;
       background-size: cover;
       background-position: center;
@@ -47,6 +54,7 @@
       transition: opacity 1.5s ease-in-out;
       pointer-events: none;
       will-change: transform, opacity;
+      background-color: var(--bg-dark);
     }
 
     /* Gradient overlay dim mask for high-contrast text safety */
@@ -80,7 +88,7 @@
       width: 90%;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 20px 0;
+      padding: 15px 0;
     }
 
     header {
@@ -97,12 +105,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 0;
+      padding: 12px 0;
+      flex-wrap: wrap;
+      gap: 15px;
     }
 
     .logo-brand {
       font-family: 'Orbitron', sans-serif;
-      font-size: 24px;
+      font-size: clamp(20px, 4vw, 24px);
       font-weight: 900;
       font-style: italic;
       color: var(--accent-pink);
@@ -137,12 +147,13 @@
       box-shadow: 0 0 15px rgba(0, 240, 255, 0.8);
     }
 
-    /* 3D Motion Scroll Reveal Animation Styles */
+    /* 3D Motion Scroll Reveal Animation Styles with Hardware Acceleration */
     .vcc-3d-scroll-item {
       opacity: 0;
       transform: perspective(1000px) rotateX(12deg) translateY(35px) scale(0.96);
-      transition: opacity 0.8s ease-out, transform 0.1s linear; /* quick linear transform transition for smooth scrolling micro-tilts */
+      transition: opacity 0.8s ease-out;
       will-change: transform, opacity;
+      content-visibility: auto;
     }
 
     .vcc-3d-scroll-item.visible {
@@ -152,22 +163,23 @@
     /* Tribute Block styling */
     .tribute-header {
       text-align: center;
-      padding: 60px 0 30px 0;
+      padding: clamp(30px, 6vw, 60px) 0 30px 0;
     }
 
     .tribute-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: 40px;
+      font-size: clamp(28px, 6vw, 40px);
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 2px;
       color: #ffffff;
       margin-bottom: 15px;
       text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+      line-height: 1.1;
     }
 
     .tribute-intro {
-      font-size: 18px;
+      font-size: clamp(15px, 2vw, 18px);
       color: #ffe8f4;
       max-width: 800px;
       margin: 0 auto;
@@ -176,7 +188,7 @@
       background: rgba(255, 0, 85, 0.1);
       border: 1px solid var(--accent-pink);
       box-shadow: var(--shadow-pink);
-      padding: 25px;
+      padding: 20px;
       border-radius: 8px;
       backdrop-filter: blur(5px);
     }
@@ -217,7 +229,7 @@
     }
 
     .gta6-info {
-      padding: 35px;
+      padding: clamp(20px, 4vw, 35px);
       text-align: center;
     }
 
@@ -238,7 +250,7 @@
 
     .gta6-headline {
       font-family: 'Orbitron', sans-serif;
-      font-size: 28px;
+      font-size: clamp(20px, 3.5vw, 28px);
       font-weight: 900;
       color: var(--accent-cyan);
       margin-bottom: 10px;
@@ -246,7 +258,7 @@
     }
 
     .gta6-body {
-      font-size: 16px;
+      font-size: 15px;
       color: var(--text-muted);
       max-width: 750px;
       margin: 0 auto;
@@ -256,7 +268,7 @@
     .section-title {
       font-family: 'Orbitron', sans-serif;
       text-align: center;
-      font-size: 32px;
+      font-size: clamp(24px, 4vw, 32px);
       margin-bottom: 40px;
       text-transform: uppercase;
       position: relative;
@@ -274,7 +286,7 @@
 
     .legacy-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 25px;
       margin-bottom: 80px;
     }
@@ -352,6 +364,18 @@
       letter-spacing: 1px;
       font-size: 15px;
     }
+
+    @media (max-width: 768px) {
+      .nav-bar {
+        justify-content: center;
+        text-align: center;
+      }
+      .nav-bar div {
+        justify-content: center;
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -365,7 +389,7 @@
   <header>
     <div class="container nav-bar">
       <a href="index.html" class="logo-brand">GTA<span>VICELAUNCHER</span></a>
-      <div style="display: flex; gap: 15px;">
+      <div style="display: flex; gap: 15px; flex-wrap: wrap;">
         <a href="live_event.html" class="back-btn" style="border-color: var(--accent-pink); color: var(--accent-pink); box-shadow: var(--shadow-pink);">Live Event</a>
         <a href="index.html" class="back-btn">← Back to Launcher</a>
       </div>
@@ -386,7 +410,7 @@
     <section class="gta6-showcase-section vcc-3d-scroll-item">
       <div class="gta6-card">
         <div class="gta6-image-container">
-          <img src="images/gta_vi_tribute.jpg" alt="GTA VI Tribute Poster">
+          <img src="images/gta_vi_tribute.jpg" alt="GTA VI Tribute Poster" loading="lazy">
         </div>
         <div class="gta6-info">
           <div class="gta6-badge">Vice City Returns</div>
@@ -507,15 +531,26 @@
       });
     });
 
-    // Dynamic 3D Scroll Motion & Parallax Engine
+    // Throttled 3D Scroll Motion & Parallax Engine via requestAnimationFrame
+    let ticking = false;
     window.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateScrollPhysics();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    function updateScrollPhysics() {
       const scrolled = window.pageYOffset;
       
       // Parallax Background shift
       const bg1 = document.getElementById("vcc-bg-slideshow-1");
       const bg2 = document.getElementById("vcc-bg-slideshow-2");
-      if (bg1) bg1.style.transform = `translateY(${scrolled * 0.12}px)`;
-      if (bg2) bg2.style.transform = `translateY(${scrolled * 0.12}px)`;
+      if (bg1) bg1.style.transform = `translateY(${scrolled * 0.12}px) translateZ(0)`;
+      if (bg2) bg2.style.transform = `translateY(${scrolled * 0.12}px) translateZ(0)`;
       
       // 3D Tilt on scroll position relative to viewport center
       const viewportHeight = window.innerHeight;
@@ -527,13 +562,12 @@
         const viewCenter = viewportHeight / 2;
         const distanceFromCenter = (itemCenter - viewCenter) / viewCenter;
         
-        // Tilt the card dynamically on rotateX and scale down slightly at screen edges
         const tilt = Math.max(-12, Math.min(12, distanceFromCenter * 10));
         const scale = Math.max(0.96, Math.min(1.04, 1 - Math.abs(distanceFromCenter) * 0.04));
         
-        item.style.transform = `perspective(1000px) rotateX(${tilt}deg) scale(${scale})`;
+        item.style.transform = `perspective(1000px) rotateX(${tilt}deg) scale(${scale}) translateZ(0)`;
       });
-    });
+    }
 
     // Dynamic Background Rotating Slideshow
     const bgImages = ['images/bg1.jpg', 'images/bg2.jpg', 'images/bg3.jpg'];
