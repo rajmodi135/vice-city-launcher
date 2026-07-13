@@ -82,7 +82,7 @@
       transition: opacity 1.5s ease-in-out;
       pointer-events: none;
       will-change: transform, opacity;
-      background-color: var(--bg-dark); /* fallback background color */
+      background-color: var(--bg-dark);
     }
 
     /* Gradient overlay dim mask for high-contrast text safety */
@@ -181,9 +181,9 @@
     .vcc-3d-scroll-item {
       opacity: 0;
       transform: perspective(1000px) rotateX(12deg) translateY(35px) scale(0.96);
-      transition: opacity 0.8s ease-out; /* layout updates handled by throttled scroll engine */
+      transition: opacity 0.8s ease-out;
       will-change: transform, opacity;
-      content-visibility: auto; /* browser rendering optimizations */
+      content-visibility: auto;
     }
 
     .vcc-3d-scroll-item.visible {
@@ -231,10 +231,11 @@
       text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
     }
 
+    /* Redesigned High-Contrast glowing buttons container */
     .cta-container {
       display: flex;
       justify-content: center;
-      gap: clamp(10px, 2vw, 20px);
+      gap: 15px;
       flex-wrap: wrap;
       margin-bottom: 40px;
     }
@@ -242,67 +243,74 @@
     .btn {
       display: inline-block;
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(11px, 1.5vw, 14px);
-      font-weight: bold;
-      padding: 12px 24px;
-      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 900;
+      padding: 15px 30px;
+      border-radius: 8px;
       text-decoration: none;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       cursor: pointer;
-      transition: all 0.2s ease-in-out;
+      transition: all 0.25s cubic-bezier(0.1, 0.9, 0.2, 1);
     }
 
+    /* Button 1: Download - Solid Pink */
     .btn-pink {
       background: var(--accent-pink);
-      color: white;
+      color: #ffffff !important;
       border: 2px solid var(--accent-pink);
-      box-shadow: var(--shadow-pink);
+      box-shadow: 0 0 15px rgba(255, 0, 85, 0.5);
     }
 
     .btn-pink:hover {
       background: transparent;
-      color: var(--accent-pink);
-      box-shadow: 0 0 20px rgba(255, 0, 85, 0.8);
+      color: var(--accent-pink) !important;
+      box-shadow: 0 0 25px rgba(255, 0, 85, 0.9);
+      transform: translateY(-3px);
     }
 
+    /* Button 2: Launch - Solid Cyan border with Cyan backing */
     .btn-cyan {
-      background: transparent;
-      color: var(--accent-cyan);
+      background: rgba(0, 240, 255, 0.15);
+      color: #00f0ff !important;
       border: 2px solid var(--accent-cyan);
-      box-shadow: var(--shadow-cyan);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
     }
 
     .btn-cyan:hover {
       background: var(--accent-cyan);
-      color: var(--bg-dark);
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
+      color: var(--bg-dark) !important;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.9);
+      transform: translateY(-3px);
     }
 
+    /* Button 3: GTA Legacy - Solid Pink border with Pink backing */
     .btn-gta-legacy {
-      background: transparent;
-      color: #ff0055;
-      border: 2px solid #ff0055;
-      box-shadow: var(--shadow-pink);
+      background: rgba(255, 0, 85, 0.15);
+      color: #ff0055 !important;
+      border: 2px solid var(--accent-pink);
+      box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
     }
 
     .btn-gta-legacy:hover {
-      background: #ff0055;
-      color: white;
-      box-shadow: 0 0 20px rgba(255, 0, 85, 0.8);
+      background: var(--accent-pink);
+      color: #ffffff !important;
+      box-shadow: 0 0 25px rgba(255, 0, 85, 0.9);
+      transform: translateY(-3px);
     }
 
-    /* Flashing Pulsing Launch Day Button */
+    /* Button 4: Flashing Pulsing Launch Day Button */
     .btn-gta-cloud-event {
+      background: rgba(255, 204, 0, 0.18) !important;
       border: 2px solid #ffcc00 !important;
       color: #ffcc00 !important;
-      box-shadow: 0 0 15px rgba(255, 204, 0, 0.4) !important;
+      box-shadow: 0 0 15px rgba(255, 204, 0, 0.5) !important;
       animation: hypeBtnPulse 1.5s infinite alternate !important;
     }
 
     @keyframes hypeBtnPulse {
       0% { transform: scale(1); box-shadow: 0 0 10px #ffcc00, 0 0 5px #ff0055; }
-      100% { transform: scale(1.04); box-shadow: 0 0 25px #ff0055, 0 0 15px #00f0ff; }
+      100% { transform: scale(1.05); box-shadow: 0 0 25px #ffcc00, 0 0 15px #00f0ff; }
     }
 
     /* Game Running Line - Workflow Timeline */
