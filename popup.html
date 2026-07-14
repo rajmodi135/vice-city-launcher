@@ -24,6 +24,41 @@
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
+    /* ── DOWNLOAD DRAWER OVERLAY ── */
+    .download-drawer {
+      position: fixed; inset: 0;
+      background: rgba(6, 2, 19, 0.99);
+      backdrop-filter: blur(20px);
+      z-index: 2000;
+      display: none;
+      flex-direction: column;
+      padding: 14px;
+      overflow-y: auto;
+      animation: drawerSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-sizing: border-box;
+    }
+    .download-drawer.active { display: flex; }
+    @keyframes drawerSlideUp {
+      from { transform: translateY(100%); }
+      to   { transform: translateY(0); }
+    }
+    .drawer-header {
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid rgba(255, 0, 85, 0.25);
+      padding-bottom: 8px; margin-bottom: 12px;
+    }
+    .drawer-title {
+      font-family: 'Impact', Arial, sans-serif; font-style: italic;
+      font-size: 15px; color: #ffcc00; letter-spacing: 1px;
+    }
+    .drawer-close-btn {
+      background: rgba(255, 0, 85, 0.1); border: 1px solid #ff0055;
+      color: #ff0055; font-size: 10px; padding: 4px 10px; cursor: pointer;
+      font-family: 'Impact', Arial, sans-serif; font-style: italic;
+      text-transform: uppercase; border-radius: 4px;
+    }
+    .drawer-close-btn:hover { background: #ff0055; color: #fff; }
+
     /* ── DOWNLOAD PANEL ── */
     .dl-header {
       text-align: center; padding: 12px 0 8px;
@@ -167,17 +202,17 @@
     </div>
   </div>
 
-  <!-- Main Tabs: LAUNCHER | CHEATS | DOWNLOADS -->
+  <!-- Main Tabs: LAUNCHER | CHEATS -->
   <div class="main-tabs">
     <button class="main-tab-btn active" data-main-tab="launcher">🚀 Launcher</button>
     <button class="main-tab-btn" data-main-tab="cheats">🎮 Cheats</button>
-    <button class="main-tab-btn" data-main-tab="downloads">⬇️ Downloads</button>
   </div>
 
   <!-- ══ TAB: LAUNCHER ══ -->
   <div class="tab-panel active" id="panel-launcher">
-    <div class="launcher-section">
+    <div class="launcher-section" style="display:flex; flex-direction:column; gap:8px;">
       <button id="launch-btn" class="neon-btn cyan-btn">LAUNCH GAME IN THIS WINDOW</button>
+      <button onclick="toggleDownloadDrawer(true)" class="neon-btn pink-btn" style="box-shadow: 0 0 10px rgba(255,0,85,0.3); background: rgba(255,0,85,0.06); border-color: #ff0055; font-size:12px; margin-top:2px;">📥 OPEN DOWNLOAD MANAGER</button>
     </div>
     <div class="info-banner">
       PRO-TIP: Press <span>`</span> (Backtick) or <span>F1</span> inside the game screen to toggle the Left Overlay Menu!
@@ -216,18 +251,18 @@
     </div>
   </div>
 
-  <!-- ══ TAB: DOWNLOADS ══ -->
-  <div class="tab-panel" id="panel-downloads">
-    <div class="dl-header">
-      <div class="dl-header-title">⬇ PARALLEL DOWNLOAD ENGINE</div>
-      <div class="dl-header-sub">Powered by Mauxx AI — Max Speed Mode</div>
+  <!-- ══ SLIDING OVERLAY: DOWNLOAD MANAGER ══ -->
+  <div class="download-drawer" id="download-drawer">
+    <div class="drawer-header">
+      <div class="drawer-title">⬇️ DOWNLOAD MANAGER</div>
+      <button class="drawer-close-btn" onclick="toggleDownloadDrawer(false)">✕ Close</button>
     </div>
 
     <!-- Speed Stats -->
     <div class="dl-stats-row">
       <div class="dl-stat-chip">
         <span class="dl-stat-num" style="color:#00f0ff" id="stat-speed">—</span>
-        <span class="dl-stat-label">DL Speed</span>
+        <span class="dl-stat-label">Speed</span>
       </div>
       <div class="dl-stat-chip">
         <span class="dl-stat-num" style="color:#ffcc00" id="stat-threads">16</span>
@@ -245,7 +280,7 @@
         <span class="dl-item-icon">🧲</span>
         <div class="dl-item-info">
           <div class="dl-item-name">GTA Vice City — Torrent</div>
-          <div class="dl-item-meta">Grand-Theft-Auto-Vice-City.torrent • 13 KB</div>
+          <div class="dl-item-meta">Grand-Theft-Auto-Vice-City.torrent • 1.4 GB</div>
         </div>
       </div>
       <div class="dl-progress-wrap"><div class="dl-progress-bar idle" id="prog-torrent"></div></div>
@@ -260,12 +295,12 @@
       </a>
     </div>
 
-    <!-- Save File -->
+    <!-- Save File (Slot 1) -->
     <div class="dl-item green-item">
       <div class="dl-item-top">
         <span class="dl-item-icon">💾</span>
         <div class="dl-item-info">
-          <div class="dl-item-name">100% Save File — $20M + All Weapons</div>
+          <div class="dl-item-name">Save Slot 1 (100% Complete)</div>
           <div class="dl-item-meta">GTAVCsf1.b • 198 KB</div>
         </div>
       </div>
@@ -277,7 +312,49 @@
       <a href="https://rajmodi135.github.io/vice-city-launcher/downloads/GTAVCsf1.b"
          class="dl-btn dl-btn-green" id="btn-save"
          onclick="startDownload('save',this)" style="margin-top:6px;">
-        ⬇ Download Save File
+        ⬇ Download Save Slot 1
+      </a>
+    </div>
+
+    <!-- Save File (Slot 2) -->
+    <div class="dl-item green-item">
+      <div class="dl-item-top">
+        <span class="dl-item-icon">💰</span>
+        <div class="dl-item-info">
+          <div class="dl-item-name">Save Slot 2 (Max Cash Richie Rich)</div>
+          <div class="dl-item-meta">RICHIE_RICHHSAVE.b • 198 KB</div>
+        </div>
+      </div>
+      <div class="dl-progress-wrap"><div class="dl-progress-bar idle" id="prog-save2"></div></div>
+      <div class="dl-status-row">
+        <span class="dl-status-text" id="st-save2">Ready to download</span>
+        <span class="dl-speed" id="sp-save2"></span>
+      </div>
+      <a href="https://rajmodi135.github.io/vice-city-launcher/downloads/RICHIE_RICHHSAVE.b"
+         class="dl-btn dl-btn-green" id="btn-save2"
+         onclick="startDownload('save2',this)" style="margin-top:6px;">
+        ⬇ Download Save Slot 2
+      </a>
+    </div>
+
+    <!-- 4K Wallpapers Pack -->
+    <div class="dl-item cyan-item">
+      <div class="dl-item-top">
+        <span class="dl-item-icon">🖼️</span>
+        <div class="dl-item-info">
+          <div class="dl-item-name">4K Wallpaper Pack (58 Wallpapers)</div>
+          <div class="dl-item-meta">GTAVI_Artwork_Wallpapers.zip • 38.1 MB</div>
+        </div>
+      </div>
+      <div class="dl-progress-wrap"><div class="dl-progress-bar idle" id="prog-wall"></div></div>
+      <div class="dl-status-row">
+        <span class="dl-status-text" id="st-wall">Ready to download</span>
+        <span class="dl-speed" id="sp-wall"></span>
+      </div>
+      <a href="https://rajmodi135.github.io/vice-city-launcher/downloads/GTAVI_Artwork_Wallpapers.zip"
+         class="dl-btn dl-btn-cyan" id="btn-wall"
+         onclick="startDownload('wall',this)" style="margin-top:6px;">
+        ⬇ Download Wallpapers Pack
       </a>
     </div>
 
@@ -307,7 +384,7 @@
       <div class="dl-item-top">
         <span class="dl-item-icon">🎁</span>
         <div class="dl-item-info">
-          <div class="dl-item-name">Complete Bundle — All Files in One ZIP</div>
+          <div class="dl-item-name">Complete Bundle ZIP</div>
           <div class="dl-item-meta">Vice-City-Complete-Pack.zip • 67 KB</div>
         </div>
       </div>
@@ -319,7 +396,7 @@
     </div>
 
     <div class="popup-tip">
-      💡 Files download directly via Chrome's built-in downloader. For the torrent file, open it with <strong>qBittorrent</strong> to begin the full game download.
+      💡 Files download directly via Chrome's built-in manager.
     </div>
 
     <div class="footer" style="margin-top:10px;">
@@ -343,11 +420,24 @@
       });
     });
 
+    // ── Toggle Download Manager Drawer ──
+    function toggleDownloadDrawer(show) {
+      if (typeof playButtonSound === 'function') playButtonSound();
+      const drawer = document.getElementById('download-drawer');
+      if (show) {
+        drawer.classList.add('active');
+      } else {
+        drawer.classList.remove('active');
+      }
+    }
+
     // ── Download with animated progress ──
     function startDownload(type, btnEl) {
       const configs = {
         torrent: { prog: 'prog-torrent', status: 'st-torrent', speed: 'sp-torrent', size: 13312,   label: 'Torrent' },
-        save:    { prog: 'prog-save',    status: 'st-save',    speed: 'sp-save',    size: 201728,  label: 'Save File' },
+        save:    { prog: 'prog-save',    status: 'st-save',    speed: 'sp-save',    size: 201728,  label: 'Save Slot 1' },
+        save2:   { prog: 'prog-save2',   status: 'st-save2',   speed: 'sp-save2',   size: 201728,  label: 'Save Slot 2' },
+        wall:    { prog: 'prog-wall',    status: 'st-wall',    speed: 'sp-wall',    size: 40000000, label: 'Wallpapers' },
         ext:     { prog: 'prog-ext',     status: 'st-ext',     speed: 'sp-ext',     size: 479994,  label: 'Extension' },
         bundle:  { prog: null,           status: null,         speed: null,          size: 67885,   label: 'Bundle' }
       };
