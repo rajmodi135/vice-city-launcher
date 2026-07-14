@@ -18,7 +18,7 @@
     .hero-section {
       padding: clamp(60px, 12vw, 120px) 0 clamp(50px, 8vw, 80px);
       text-align: left;
-      max-width: 680px;
+      max-width: 740px;
       margin-left: 0;
       margin-right: auto;
     }
@@ -36,16 +36,18 @@
     @keyframes fadeDrop { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:none} }
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(38px, 9vw, 90px);
+      font-size: clamp(34px, 7.8vw, 72px);
       font-weight: 900; font-style: italic;
-      line-height: 1.0;
+      line-height: 1.05;
       background: linear-gradient(135deg, #fff 0%, #ffcc00 35%, #ff0055 70%, #00f0ff 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
       text-shadow: none;
       margin-bottom: 22px;
       animation: fadeDrop .7s ease .1s both;
-      letter-spacing: -1px;
+      letter-spacing: -1.5px;
+      padding-right: 15px;
+      width: 100%;
     }
     .hero-sub {
       color: var(--text-soft); font-size: clamp(15px, 2vw, 18px);
@@ -984,6 +986,17 @@
           }
         }
       });
+      document.body.addEventListener('touchstart', e => {
+        if (window.GTAAudio) {
+          GTAAudio.init();
+          if (GTAAudio.ctx && GTAAudio.ctx.state === 'suspended') GTAAudio.ctx.resume();
+          if (e.target.matches(selectors) || e.target.closest(selectors)) {
+            if (!e.target.closest('.cheat-code')) {
+              GTAAudio.playClick();
+            }
+          }
+        }
+      }, { passive: true });
     })();
 </script>
 <div class="crt-overlay"></div>

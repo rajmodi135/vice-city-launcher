@@ -565,6 +565,17 @@
           }
         }
       });
+      document.body.addEventListener('touchstart', e => {
+        if (window.GTAAudio) {
+          GTAAudio.init();
+          if (GTAAudio.ctx && GTAAudio.ctx.state === 'suspended') GTAAudio.ctx.resume();
+          if (e.target.matches(selectors) || e.target.closest(selectors)) {
+            if (!e.target.closest('.cheat-code')) {
+              GTAAudio.playClick();
+            }
+          }
+        }
+      }, { passive: true });
     })();
 </script>
 <div class="crt-overlay"></div>
