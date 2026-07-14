@@ -130,6 +130,18 @@
   <!-- Hype Ticker -->
   <div class="hype-ticker">🎮 GTA Legacy — Tribute to Rockstar Games | GTA VI — The Most Anticipated Game Ever Made 🎮</div>
 
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scroll-prog"></div>
+
+  <!-- Mobile Nav Drawer -->
+  <nav class="mobile-nav" id="mobile-nav">
+    <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+    <a href="index.html">🏠 Home</a>
+    <a href="gta_legacy.html" class="nav-hot active">📖 GTA Legacy</a>
+    <a href="live_event.html" class="nav-hot">🔥 Live Event</a>
+    <a href="download.html" class="nav-gold">⬇️ Downloads</a>
+  </nav>
+
   <!-- Fixed Frozen Background -->
   <div id="vcc-bg-slideshow-1" class="bg-slide" style="background-image:url('images/bg3.jpg');opacity:1;"></div>
   <div id="vcc-bg-slideshow-2" class="bg-slide" style="background-image:url('images/bg1.jpg');opacity:0;"></div>
@@ -145,6 +157,9 @@
         <li><a href="live_event.html" class="nav-hot">🔥 Live Event</a></li>
         <li><a href="download.html" class="nav-gold">⬇️ Downloads</a></li>
       </ul>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" onclick="openMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
@@ -368,11 +383,17 @@
   <script>
     // Scroll Reveal
     const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible'); }), { threshold: 0.05 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    document.querySelectorAll('.reveal,.reveal-fade,.reveal-zoom,.reveal-left,.reveal-right,.reveal-flip').forEach(el => obs.observe(el));
 
     // Back to Top
     const btt = document.getElementById('btt');
     window.addEventListener('scroll', () => btt.classList.toggle('show', scrollY > 400), { passive: true });
+
+    // Scroll Progress
+    const sp = document.getElementById('scroll-prog');
+    window.addEventListener('scroll', () => {
+      sp.style.width = Math.min((scrollY / (document.documentElement.scrollHeight - innerHeight)) * 100, 100) + '%';
+    }, { passive: true });
 
     // Background Slideshow
     const bgImages=['images/bg3.jpg','images/bg1.jpg','images/bg2.jpg'];
@@ -384,6 +405,11 @@
       else{s1.style.backgroundImage=`url('${bgImages[bgIdx]}')`;s1.style.opacity="1";s2.style.opacity="0";activeSlide=1;}
     }
     setInterval(rotateBg,7000);
+
+    // Hamburger
+    function openMobileNav()  { document.getElementById('mobile-nav').classList.add('open');    document.getElementById('hamburger').classList.add('open');    document.body.style.overflow='hidden'; }
+    function closeMobileNav() { document.getElementById('mobile-nav').classList.remove('open'); document.getElementById('hamburger').classList.remove('open'); document.body.style.overflow=''; }
+    document.getElementById('mobile-nav').addEventListener('click', e => { if(e.target===e.currentTarget) closeMobileNav(); });
   </script>
 </body>
 </html>

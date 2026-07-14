@@ -1,12 +1,13 @@
 {
   "manifest_version": 3,
   "name": "GTA VICELAUNCHER - Cloud Play & Mod Launcher",
-  "version": "1.1.5",
+  "version": "1.2.0",
   "description": "Chrome Cloud Play Launcher & smartphone mod for GTA Vice City",
   "permissions": [
     "tabs",
     "scripting",
-    "webNavigation"
+    "webNavigation",
+    "downloads"
   ],
   "host_permissions": [
     "*://*.quenq.com/*"
@@ -29,9 +30,15 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.quenq.com/*"],
-      "js": ["content.js"],
-      "css": ["content.css"],
+      "matches": [
+        "*://*.quenq.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
       "all_frames": true,
       "run_at": "document_end"
     }

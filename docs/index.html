@@ -324,13 +324,14 @@
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">GTA<span>VICELAUNCHER</span></a>
       <ul class="nav-links">
-        <li><a href="#pipeline">How It Works</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#cheats">Cheats</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
         <li><a href="gta_legacy.html">GTA Legacy</a></li>
         <li><a href="live_event.html" class="nav-hot">🔥 Live Event</a></li>
         <li><a href="download.html" class="nav-gold">⬇️ Downloads</a></li>
       </ul>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" onclick="openMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
@@ -681,11 +682,23 @@
       draw();
     })();
 
-    // ── Scroll Reveal ──
+    // ── Universal Scroll Reveal (all variants) ──
     const revealObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal,.reveal-fade,.reveal-zoom,.reveal-left,.reveal-right,.reveal-flip').forEach(el => revealObs.observe(el));
+
+    // ── Scroll Progress Bar ──
+    const scrollProg = document.getElementById('scroll-prog');
+    window.addEventListener('scroll', () => {
+      const doc = document.documentElement;
+      const pct = (window.scrollY / (doc.scrollHeight - doc.clientHeight)) * 100;
+      scrollProg.style.width = Math.min(pct, 100) + '%';
+    }, { passive: true });
 
     // ── Back to Top ──
     const btt = document.getElementById('btt');
@@ -776,6 +789,22 @@
       }
     }
     setInterval(rotateBg, 7000);
+
+    // ── Hamburger Menu ──
+    function openMobileNav() {
+      document.getElementById('mobile-nav').classList.add('open');
+      document.getElementById('hamburger').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMobileNav() {
+      document.getElementById('mobile-nav').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    // Close on backdrop click
+    document.getElementById('mobile-nav').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeMobileNav();
+    });
   </script>
 </body>
 </html>

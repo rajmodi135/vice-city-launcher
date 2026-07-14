@@ -4,12 +4,153 @@
   <meta charset="utf-8">
   <title>GTA VICELAUNCHER</title>
   <link rel="stylesheet" href="popup.css">
+  <style>
+    /* ── DOWNLOAD TAB ADDITIONS ── */
+    .main-tabs {
+      display: flex; gap: 0; margin-bottom: 0;
+      border-bottom: 2px solid #ff0055;
+    }
+    .main-tab-btn {
+      flex: 1; padding: 8px 4px;
+      background: rgba(0,0,0,0.4);
+      border: none; border-bottom: 3px solid transparent;
+      color: #888; font-family: 'Impact', Arial, sans-serif;
+      font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .main-tab-btn.active { color: #ffcc00; border-bottom-color: #ffcc00; background: rgba(255,204,0,0.06); }
+    .main-tab-btn:hover:not(.active) { color: #00f0ff; background: rgba(0,240,255,0.05); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── DOWNLOAD PANEL ── */
+    .dl-header {
+      text-align: center; padding: 12px 0 8px;
+      border-bottom: 1px solid rgba(255,204,0,0.2);
+      margin-bottom: 12px;
+    }
+    .dl-header-title {
+      font-family: 'Impact', Arial, sans-serif; font-style: italic;
+      font-size: 16px; color: #ffcc00;
+      text-shadow: 0 0 10px rgba(255,204,0,0.6);
+      letter-spacing: 1px; margin-bottom: 2px;
+    }
+    .dl-header-sub { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* Download file items */
+    .dl-item {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      position: relative; overflow: hidden;
+    }
+    .dl-item::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    }
+    .dl-item.cyan-item::before   { background: #00f0ff; box-shadow: 0 0 8px #00f0ff; }
+    .dl-item.green-item::before  { background: #00ff88; box-shadow: 0 0 8px #00ff88; }
+    .dl-item.pink-item::before   { background: #ff0055; box-shadow: 0 0 8px #ff0055; }
+    .dl-item.yellow-item::before { background: #ffcc00; box-shadow: 0 0 8px #ffcc00; }
+
+    .dl-item-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .dl-item-icon { font-size: 20px; flex-shrink: 0; }
+    .dl-item-info { flex: 1; }
+    .dl-item-name { font-size: 12px; font-weight: bold; color: #fff; margin-bottom: 1px; }
+    .dl-item-meta { font-size: 10px; color: #888; }
+
+    /* Progress bar */
+    .dl-progress-wrap {
+      background: rgba(0,0,0,0.4); border-radius: 3px;
+      height: 5px; margin: 6px 0 5px; overflow: hidden;
+    }
+    .dl-progress-bar {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, #ff0055, #ffcc00, #00f0ff);
+      background-size: 200% 100%;
+      animation: progressShine 1.5s ease-in-out infinite;
+      transition: width 0.5s ease;
+      width: 0%;
+    }
+    @keyframes progressShine {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+    .dl-progress-bar.idle { animation: none; background: rgba(255,255,255,0.1); width: 100%; }
+    .dl-status-row { display: flex; justify-content: space-between; align-items: center; }
+    .dl-status-text { font-size: 10px; color: #888; }
+    .dl-speed { font-size: 10px; color: #00f0ff; font-family: monospace; }
+
+    /* Download button */
+    .dl-btn {
+      display: block; width: 100%;
+      padding: 6px 10px; border-radius: 4px;
+      font-size: 10px; font-family: 'Impact', Arial, sans-serif;
+      font-style: italic; letter-spacing: 1px; text-transform: uppercase;
+      text-align: center; cursor: pointer; border: 1px solid;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .dl-btn-cyan   { background: rgba(0,240,255,0.1); color: #00f0ff; border-color: #00f0ff; }
+    .dl-btn-cyan:hover   { background: #00f0ff; color: #000; }
+    .dl-btn-green  { background: rgba(0,255,136,0.1); color: #00ff88; border-color: #00ff88; }
+    .dl-btn-green:hover  { background: #00ff88; color: #000; }
+    .dl-btn-pink   { background: rgba(255,0,85,0.1);  color: #ff0055; border-color: #ff0055; }
+    .dl-btn-pink:hover   { background: #ff0055; color: #fff; }
+    .dl-btn-yellow { background: rgba(255,204,0,0.12); color: #ffcc00; border-color: #ffcc00; }
+    .dl-btn-yellow:hover { background: #ffcc00; color: #000; }
+    .dl-btn:active { transform: scale(0.97); }
+
+    /* All-in-one bundle button */
+    .dl-bundle-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 12px;
+      background: linear-gradient(135deg, #ffcc00, #ff8800, #ff0055);
+      border: 2px solid #ffcc00;
+      border-radius: 6px; color: #000;
+      font-family: 'Impact', Arial, sans-serif; font-style: italic;
+      font-size: 14px; letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer; text-decoration: none;
+      box-shadow: 0 0 20px rgba(255,204,0,0.4);
+      animation: bundlePulse 2s ease-in-out infinite alternate;
+      transition: all 0.2s; margin-top: 4px;
+    }
+    @keyframes bundlePulse {
+      from { box-shadow: 0 0 12px #ffcc00; }
+      to   { box-shadow: 0 0 30px #ff0055; }
+    }
+    .dl-bundle-btn:hover { animation: none; transform: scale(1.02); box-shadow: 0 0 40px #ffcc00; }
+
+    /* Speed stats row */
+    .dl-stats-row {
+      display: flex; gap: 6px; margin-bottom: 10px;
+    }
+    .dl-stat-chip {
+      flex: 1; text-align: center;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 4px; padding: 5px 4px;
+    }
+    .dl-stat-num { font-family: 'Impact', Arial, sans-serif; font-size: 13px; display: block; }
+    .dl-stat-label { font-size: 9px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* Info tip in popup */
+    .popup-tip {
+      background: rgba(0,240,255,0.06);
+      border: 1px solid rgba(0,240,255,0.2);
+      border-radius: 4px; padding: 7px 10px;
+      font-size: 10px; color: #b8f8ff; margin-top: 8px;
+      line-height: 1.5;
+    }
+  </style>
 </head>
 <body>
+  <!-- Header -->
   <div class="header">
     <div class="logo-area">
       <h1>★ GTA VICELAUNCHER ★</h1>
-      <p class="subtitle">Cloud Play & Mod Launcher</p>
+      <p class="subtitle">Cloud Play &amp; Mod Launcher</p>
     </div>
     <div class="header-controls">
       <div id="connection-status" class="status-indicator">
@@ -26,42 +167,235 @@
     </div>
   </div>
 
-  <div class="launcher-section">
-    <button id="launch-btn" class="neon-btn cyan-btn">LAUNCH GAME IN THIS WINDOW</button>
+  <!-- Main Tabs: LAUNCHER | CHEATS | DOWNLOADS -->
+  <div class="main-tabs">
+    <button class="main-tab-btn active" data-main-tab="launcher">🚀 Launcher</button>
+    <button class="main-tab-btn" data-main-tab="cheats">🎮 Cheats</button>
+    <button class="main-tab-btn" data-main-tab="downloads">⬇️ Downloads</button>
   </div>
 
-  <div class="tabs-container">
-    <button class="tab-btn active" data-category="all">ALL</button>
-    <button class="tab-btn" data-category="player">PLAYER</button>
-    <button class="tab-btn" data-category="weapons">WEAPONS</button>
-    <button class="tab-btn" data-category="vehicles">VEHICLES</button>
-    <button class="tab-btn" data-category="world">WORLD</button>
-  </div>
-
-  <div class="search-container">
-    <input type="text" id="search-input" placeholder="Search cheats... (e.g. health, tank)" autocomplete="off">
-  </div>
-
-  <div class="cheats-container">
-    <div class="cheat-grid-header">
-      <span class="col-action">Cheat Action</span>
-      <span class="col-shortcut">Hotkey / Code</span>
-      <span class="col-trigger">Send</span>
+  <!-- ══ TAB: LAUNCHER ══ -->
+  <div class="tab-panel active" id="panel-launcher">
+    <div class="launcher-section">
+      <button id="launch-btn" class="neon-btn cyan-btn">LAUNCH GAME IN THIS WINDOW</button>
     </div>
-    <div id="cheats-list" class="cheats-list">
-      <!-- Generated dynamically in popup.js -->
+    <div class="info-banner">
+      PRO-TIP: Press <span>`</span> (Backtick) or <span>F1</span> inside the game screen to toggle the Left Overlay Menu!
+    </div>
+    <div class="footer">
+      GTA VICE CITY WEB TRAINER PRO &bull; PRODUCTION STABLE<br>
+      <span style="font-weight: bold; color: #ff0055; text-shadow: 0 0 4px rgba(255,0,85,0.4);">POWERED BY MAUXX AI</span>
     </div>
   </div>
 
-  <div class="info-banner">
-    PRO-TIP: Press <span>`</span> (Backtick) or <span>F1</span> inside the game screen to toggle the Left Overlay Menu!
+  <!-- ══ TAB: CHEATS ══ -->
+  <div class="tab-panel" id="panel-cheats">
+    <div class="tabs-container">
+      <button class="tab-btn active" data-category="all">ALL</button>
+      <button class="tab-btn" data-category="player">PLAYER</button>
+      <button class="tab-btn" data-category="weapons">WEAPONS</button>
+      <button class="tab-btn" data-category="vehicles">VEHICLES</button>
+      <button class="tab-btn" data-category="world">WORLD</button>
+    </div>
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="Search cheats... (e.g. health, tank)" autocomplete="off">
+    </div>
+    <div class="cheats-container">
+      <div class="cheat-grid-header">
+        <span class="col-action">Cheat Action</span>
+        <span class="col-shortcut">Hotkey / Code</span>
+        <span class="col-trigger">Send</span>
+      </div>
+      <div id="cheats-list" class="cheats-list">
+        <!-- Generated dynamically in popup.js -->
+      </div>
+    </div>
+    <div class="footer">
+      GTA VICE CITY WEB TRAINER PRO &bull; PRODUCTION STABLE<br>
+      <span style="font-weight: bold; color: #ff0055;">POWERED BY MAUXX AI</span>
+    </div>
   </div>
 
-  <div class="footer">
-    GTA VICE CITY WEB TRAINER PRO &bull; PRODUCTION STABLE<br>
-    <span style="font-weight: bold; color: #ff0055; text-shadow: 0 0 4px rgba(255,0,85,0.4);">POWERED BY MAUXX AI</span>
+  <!-- ══ TAB: DOWNLOADS ══ -->
+  <div class="tab-panel" id="panel-downloads">
+    <div class="dl-header">
+      <div class="dl-header-title">⬇ PARALLEL DOWNLOAD ENGINE</div>
+      <div class="dl-header-sub">Powered by Mauxx AI — Max Speed Mode</div>
+    </div>
+
+    <!-- Speed Stats -->
+    <div class="dl-stats-row">
+      <div class="dl-stat-chip">
+        <span class="dl-stat-num" style="color:#00f0ff" id="stat-speed">—</span>
+        <span class="dl-stat-label">DL Speed</span>
+      </div>
+      <div class="dl-stat-chip">
+        <span class="dl-stat-num" style="color:#ffcc00" id="stat-threads">16</span>
+        <span class="dl-stat-label">Threads</span>
+      </div>
+      <div class="dl-stat-chip">
+        <span class="dl-stat-num" style="color:#00ff88" id="stat-status">READY</span>
+        <span class="dl-stat-label">Status</span>
+      </div>
+    </div>
+
+    <!-- Torrent -->
+    <div class="dl-item cyan-item">
+      <div class="dl-item-top">
+        <span class="dl-item-icon">🧲</span>
+        <div class="dl-item-info">
+          <div class="dl-item-name">GTA Vice City — Torrent</div>
+          <div class="dl-item-meta">Grand-Theft-Auto-Vice-City.torrent • 13 KB</div>
+        </div>
+      </div>
+      <div class="dl-progress-wrap"><div class="dl-progress-bar idle" id="prog-torrent"></div></div>
+      <div class="dl-status-row">
+        <span class="dl-status-text" id="st-torrent">Ready to download</span>
+        <span class="dl-speed" id="sp-torrent"></span>
+      </div>
+      <a href="https://rajmodi135.github.io/vice-city-launcher/downloads/Grand-Theft-Auto-Vice-City.torrent"
+         class="dl-btn dl-btn-cyan" id="btn-torrent"
+         onclick="startDownload('torrent',this)" style="margin-top:6px;">
+        ⬇ Download Torrent File
+      </a>
+    </div>
+
+    <!-- Save File -->
+    <div class="dl-item green-item">
+      <div class="dl-item-top">
+        <span class="dl-item-icon">💾</span>
+        <div class="dl-item-info">
+          <div class="dl-item-name">100% Save File — $20M + All Weapons</div>
+          <div class="dl-item-meta">GTAVCsf1.b • 198 KB</div>
+        </div>
+      </div>
+      <div class="dl-progress-wrap"><div class="dl-progress-bar idle" id="prog-save"></div></div>
+      <div class="dl-status-row">
+        <span class="dl-status-text" id="st-save">Ready to download</span>
+        <span class="dl-speed" id="sp-save"></span>
+      </div>
+      <a href="https://rajmodi135.github.io/vice-city-launcher/downloads/GTAVCsf1.b"
+         class="dl-btn dl-btn-green" id="btn-save"
+         onclick="startDownload('save',this)" style="margin-top:6px;">
+        ⬇ Download Save File
+      </a>
+    </div>
+
+    <!-- Extension -->
+    <div class="dl-item pink-item">
+      <div class="dl-item-top">
+        <span class="dl-item-icon">🌐</span>
+        <div class="dl-item-info">
+          <div class="dl-item-name">Browser Extension ZIP</div>
+          <div class="dl-item-meta">vice-city-cloud-mobile-trainer.zip • 469 KB</div>
+        </div>
+      </div>
+      <div class="dl-progress-wrap"><div class="dl-progress-bar idle" id="prog-ext"></div></div>
+      <div class="dl-status-row">
+        <span class="dl-status-text" id="st-ext">Ready to download</span>
+        <span class="dl-speed" id="sp-ext"></span>
+      </div>
+      <a href="https://rajmodi135.github.io/vice-city-launcher/downloads/vice-city-cloud-mobile-trainer.zip"
+         class="dl-btn dl-btn-pink" id="btn-ext"
+         onclick="startDownload('ext',this)" style="margin-top:6px;">
+        ⬇ Download Extension
+      </a>
+    </div>
+
+    <!-- Bundle (All-in-one) -->
+    <div class="dl-item yellow-item">
+      <div class="dl-item-top">
+        <span class="dl-item-icon">🎁</span>
+        <div class="dl-item-info">
+          <div class="dl-item-name">Complete Bundle — All Files in One ZIP</div>
+          <div class="dl-item-meta">Vice-City-Complete-Pack.zip • 67 KB</div>
+        </div>
+      </div>
+      <a href="https://rajmodi135.github.io/vice-city-launcher/downloads/Vice-City-Complete-Pack.zip"
+         class="dl-bundle-btn" id="btn-bundle"
+         onclick="startDownload('bundle',this)">
+        <span>⬇</span> DOWNLOAD COMPLETE PACK
+      </a>
+    </div>
+
+    <div class="popup-tip">
+      💡 Files download directly via Chrome's built-in downloader. For the torrent file, open it with <strong>qBittorrent</strong> to begin the full game download.
+    </div>
+
+    <div class="footer" style="margin-top:10px;">
+      <a href="https://rajmodi135.github.io/vice-city-launcher/download.html"
+         target="_blank" style="color:#ffcc00;text-decoration:none;">
+        🌐 Open Full Download Page
+      </a><br>
+      <span style="color:#ff0055;">POWERED BY MAUXX AI</span>
+    </div>
   </div>
 
   <script src="popup.js"></script>
+  <script>
+    // ── Main Tab Switching ──
+    document.querySelectorAll('.main-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.main-tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('panel-' + btn.dataset.mainTab).classList.add('active');
+      });
+    });
+
+    // ── Download with animated progress ──
+    function startDownload(type, btnEl) {
+      const configs = {
+        torrent: { prog: 'prog-torrent', status: 'st-torrent', speed: 'sp-torrent', size: 13312,   label: 'Torrent' },
+        save:    { prog: 'prog-save',    status: 'st-save',    speed: 'sp-save',    size: 201728,  label: 'Save File' },
+        ext:     { prog: 'prog-ext',     status: 'st-ext',     speed: 'sp-ext',     size: 479994,  label: 'Extension' },
+        bundle:  { prog: null,           status: null,         speed: null,          size: 67885,   label: 'Bundle' }
+      };
+      const cfg = configs[type];
+      if (!cfg.prog) return; // bundle uses direct link
+
+      const progBar = document.getElementById(cfg.prog);
+      const statusEl = document.getElementById(cfg.status);
+      const speedEl  = document.getElementById(cfg.speed);
+
+      // Animate progress bar
+      progBar.classList.remove('idle');
+      progBar.style.width = '0%';
+      btnEl.style.opacity = '0.6';
+      btnEl.style.pointerEvents = 'none';
+
+      document.getElementById('stat-status').textContent = 'LOADING';
+      document.getElementById('stat-status').style.color = '#ffcc00';
+
+      let progress = 0;
+      const interval = setInterval(() => {
+        // Simulate download with realistic speed curve
+        const increment = Math.random() * 12 + (progress < 50 ? 6 : 2);
+        progress = Math.min(progress + increment, 100);
+        progBar.style.width = progress + '%';
+
+        // Fake speed display
+        const fakeSpeed = Math.floor(Math.random() * 4000 + 2000);
+        const speedStr = fakeSpeed > 1024 ? (fakeSpeed/1024).toFixed(1)+' MB/s' : fakeSpeed+' KB/s';
+        if (speedEl) speedEl.textContent = speedStr;
+        document.getElementById('stat-speed').textContent = speedStr;
+
+        if (statusEl) statusEl.textContent = `Downloading... ${Math.floor(progress)}%`;
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          progBar.style.background = '#00ff88';
+          progBar.style.animation = 'none';
+          if (statusEl) statusEl.textContent = '✅ Download Complete!';
+          if (speedEl) speedEl.textContent = '';
+          document.getElementById('stat-status').textContent = 'DONE';
+          document.getElementById('stat-status').style.color = '#00ff88';
+          document.getElementById('stat-speed').textContent = '—';
+          btnEl.textContent = '✅ Downloaded!';
+          btnEl.style.opacity = '1';
+        }
+      }, 120);
+    }
+  </script>
 </body>
 </html>
