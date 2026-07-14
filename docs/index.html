@@ -339,6 +339,7 @@
   <div id="bg-slide-1" class="bg-slide" style="background-image:url('images/bg1.jpg');opacity:1;"></div>
   <div id="bg-slide-2" class="bg-slide" style="background-image:url('images/bg2.jpg');opacity:0;"></div>
   <div id="bg-slide-3" class="bg-slide" style="background-image:url('images/bg3.jpg');opacity:0;"></div>
+  <div id="bg-slide-4" class="bg-slide" style="background-image:url('images/vercetti_memories.jpg');opacity:0;"></div>
   <div class="bg-overlay"></div>
 
   <!-- Particle Canvas -->
@@ -802,12 +803,14 @@
         }
       }
 
-      // Scroll-driven Background switching (3 slides)
+      // Scroll-driven Background switching (4 slides)
       let activeIdx = 0;
-      if (pct > 0.33 && pct <= 0.66) {
-        activeIdx = 1;
-      } else if (pct > 0.66) {
+      if (pct > 0.75) {
+        activeIdx = 3;
+      } else if (pct > 0.5) {
         activeIdx = 2;
+      } else if (pct > 0.25) {
+        activeIdx = 1;
       }
 
       bgSlides.forEach((slide, idx) => {
@@ -1180,7 +1183,7 @@
       }
 
       // Preload background images to eliminate visual flash on scroll
-      const urls = ['images/bg1.jpg', 'images/bg2.jpg', 'images/bg3.jpg'];
+      const urls = ['images/bg1.jpg', 'images/bg2.jpg', 'images/bg3.jpg', 'images/vercetti_memories.jpg'];
       urls.forEach(url => {
         const img = new Image();
         img.src = url;
