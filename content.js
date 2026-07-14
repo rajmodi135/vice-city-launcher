@@ -850,25 +850,6 @@ document.addEventListener("fullscreenchange", () => {
   if (fsElement) {
     console.log("[GTA VICELAUNCHER] Native fullscreen detected on:", fsElement.tagName);
     
-    // If the browser went fullscreen on a canvas/iframe leaf element directly,
-    // redirect native fullscreen to its parent container to host overlay DOM elements.
-    if ((fsElement.tagName === "CANVAS" || fsElement.tagName === "IFRAME") && fsElement.parentElement && !fsElement.dataset.fsRedirected) {
-      const parent = fsElement.parentElement;
-      fsElement.dataset.fsRedirected = "true";
-      
-      fsElement.style.width = "100%";
-      fsElement.style.height = "100%";
-      fsElement.style.position = "absolute";
-      fsElement.style.top = "0";
-      fsElement.style.left = "0";
-      
-      document.exitFullscreen().then(() => {
-        parent.requestFullscreen().catch(err => {
-          console.error("[GTA VICELAUNCHER] Parent fullscreen redirection failed:", err);
-        });
-      });
-      return;
-    }
     
     // Append overlays directly inside the active fullscreen container element
     if (phoneContainer) {
