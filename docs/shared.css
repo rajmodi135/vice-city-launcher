@@ -468,10 +468,10 @@ code {
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   font-family: var(--font-display);
-  font-size: clamp(11px, 1.4vw, 13px);
+  font-size: clamp(10px, 1.2vw, 12px);
   font-weight: 900;
   text-transform: uppercase; letter-spacing: 1.5px;
-  padding: 13px 28px;
+  padding: 10px 22px;
   border-radius: var(--radius-sm);
   border: 2px solid;
   cursor: pointer;
@@ -498,23 +498,23 @@ code {
 .btn-ghost  { background: transparent; color: var(--text-soft); border-color: rgba(255,255,255,0.2); }
 .btn-ghost:hover  { border-color: var(--cyan); color: var(--cyan); }
 
-.btn-xl { padding: 18px 50px; font-size: clamp(14px, 2vw, 17px); border-radius: var(--radius-pill); }
+.btn-xl { padding: 12px 34px; font-size: clamp(12px, 1.6vw, 14px); border-radius: var(--radius-pill); }
 .btn-full { width: 100%; }
 
 /* ── MEGA CTA (download) ── */
 .btn-mega {
-  display: inline-flex; align-items: center; justify-content: center; gap: 14px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
   font-family: var(--font-display);
-  font-size: clamp(14px, 2.2vw, 18px);
-  font-weight: 900; letter-spacing: 2px; text-transform: uppercase;
-  padding: 22px 60px; border-radius: var(--radius-pill);
+  font-size: clamp(12px, 1.8vw, 15px);
+  font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 15px 40px; border-radius: var(--radius-pill);
   background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 50%, var(--pink) 100%);
   color: #000 !important; border: 3px solid var(--yellow);
-  box-shadow: 0 0 35px rgba(255,204,0,.55), 0 0 70px rgba(255,0,85,.2), 0 8px 30px rgba(0,0,0,.4);
+  box-shadow: 0 0 25px rgba(255,204,0,.5), 0 0 50px rgba(255,0,85,.15), 0 6px 20px rgba(0,0,0,.4);
   animation: megaPulse 2s ease-in-out infinite alternate;
   position: relative; overflow: hidden;
   text-decoration: none; cursor: pointer;
-  width: 100%; max-width: 580px;
+  width: 100%; max-width: 440px;
 }
 .btn-mega::before {
   content: '';
