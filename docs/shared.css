@@ -76,7 +76,7 @@ code {
 
 /* ── FIXED FROZEN BG ── */
 .bg-slide {
-  position: fixed; inset: 0;
+  position: fixed; inset: -15px;
   z-index: -3;
   background-size: cover;
   background-position: center;
@@ -495,35 +495,27 @@ code {
 
 /* ── MEGA CTA (download) ── */
 .btn-mega {
-  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   font-family: var(--font-display);
-  font-size: clamp(12px, 1.8vw, 15px);
+  font-size: clamp(11px, 1.5vw, 13px);
   font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase;
-  padding: 15px 40px; border-radius: var(--radius-pill);
-  background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 50%, var(--pink) 100%);
-  color: #000 !important; border: 3px solid var(--yellow);
-  box-shadow: 0 0 25px rgba(255,204,0,.5), 0 0 50px rgba(255,0,85,.15), 0 6px 20px rgba(0,0,0,.4);
-  animation: megaPulse 2s ease-in-out infinite alternate;
+  padding: 12px 28px; border-radius: var(--radius-sm);
+  background: rgba(255, 204, 0, 0.12);
+  color: var(--yellow) !important; border: 2px solid var(--yellow);
+  box-shadow: 0 0 14px rgba(255, 204, 0, 0.25);
   position: relative; overflow: hidden;
   text-decoration: none; cursor: pointer;
-  width: 100%; max-width: 440px;
+  width: 100%; max-width: 380px;
+  transition: var(--transition);
 }
-.btn-mega::before {
-  content: '';
-  position: absolute; top: -50%; left: -60%;
-  width: 40%; height: 200%;
-  background: rgba(255,255,255,0.22);
-  transform: skewX(-20deg);
-  animation: shineSlide 3s ease-in-out infinite;
+.btn-mega:hover {
+  background: var(--yellow);
+  color: #000 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 0 28px rgba(255, 204, 0, 0.65);
 }
-@keyframes shineSlide { 0%,40%{left:-60%} 60%,100%{left:140%} }
-@keyframes megaPulse {
-  0%   { box-shadow: 0 0 20px #ffcc00, 0 0 40px rgba(255,0,85,.2); }
-  100% { box-shadow: 0 0 50px #ffcc00, 0 0 90px rgba(255,0,85,.4); }
-}
-.btn-mega:hover { animation: none; transform: translateY(-4px) scale(1.02); box-shadow: 0 0 70px #ffcc00, 0 0 120px rgba(255,0,85,.5), 0 14px 40px rgba(0,0,0,.5); }
-.btn-mega .arrow { font-size: 1.3em; animation: arrowBounce 1s ease-in-out infinite alternate; }
-@keyframes arrowBounce { 0%{transform:translateY(0)} 100%{transform:translateY(5px)} }
+.btn-mega .arrow { font-size: 1.2em; display: inline-block; transition: transform 0.2s; }
+.btn-mega:hover .arrow { transform: translateY(3px); }
 
 /* ── PULSE ANIMATIONS ── */
 @keyframes pulsePink   { 0%,100%{box-shadow:0 0 12px var(--pink)} 50%{box-shadow:0 0 30px var(--pink)} }
