@@ -841,6 +841,7 @@
     }
 
     function copyCheat(el, code) {
+      if (window.GTAAudio) GTAAudio.playSuccess();
       navigator.clipboard?.writeText(code).then(() => {
         el.classList.add('copied');
         const orig = el.textContent;
@@ -896,7 +897,92 @@
     document.getElementById('mobile-nav').addEventListener('click', e => {
       if (e.target === e.currentTarget) closeMobileNav();
     });
-  </script>
+  
+    // ── GTA Synth Audio Engine (Web Audio API) ──
+    const GTAAudio = {
+      ctx: null,
+      init() {
+        if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+      },
+      playHover() {
+        this.init();
+        if (!this.ctx) return;
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(450, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.08);
+      },
+      playClick() {
+        this.init();
+        if (!this.ctx) return;
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(580, this.ctx.currentTime);
+        osc.frequency.setValueAtTime(880, this.ctx.currentTime + 0.04);
+        gain.gain.setValueAtTime(0.06, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.15);
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.15);
+      },
+      playSuccess() {
+        this.init();
+        if (!this.ctx) return;
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        const now = this.ctx.currentTime;
+        const playNote = (freq, delay, duration, vol) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          const filter = this.ctx.createBiquadFilter();
+          osc.connect(filter);
+          filter.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(freq, now + delay);
+          filter.type = 'bandpass';
+          filter.frequency.value = 800;
+          gain.gain.setValueAtTime(vol, now + delay);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + delay + duration);
+          osc.start(now + delay);
+          osc.stop(now + delay + duration);
+        };
+        playNote(523.25, 0, 0.1, 0.04);
+        playNote(659.25, 0.08, 0.1, 0.04);
+        playNote(783.99, 0.16, 0.1, 0.04);
+        playNote(1046.50, 0.24, 0.2, 0.05);
+      }
+    };
+
+    window.GTAAudio = GTAAudio;
+
+    // Attach delegated hover & click sound events
+    (function() {
+      const selectors = '.btn, .btn-mega, .qdl-card, .nav-links a, .hamburger, .cheat-code, .faq-q, .mobile-nav a, .hud-star, .timeline-row';
+      document.body.addEventListener('mouseover', e => {
+        if (e.target.matches(selectors) || e.target.closest(selectors)) {
+          GTAAudio.playHover();
+        }
+      });
+      document.body.addEventListener('click', e => {
+        if (e.target.matches(selectors) || e.target.closest(selectors)) {
+          if (!e.target.closest('.cheat-code')) {
+            GTAAudio.playClick();
+          }
+        }
+      });
+    })();
+</script>
 <div class="crt-overlay"></div>
 </body>
 </html>
