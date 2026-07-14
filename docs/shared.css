@@ -152,7 +152,7 @@ code {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
 }
 .nav-inner {
-  width: 92%; max-width: 1280px; margin: 0 auto;
+  width: 95%; max-width: 1600px; margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between;
   padding: 14px 0;
   gap: 20px;
@@ -236,7 +236,7 @@ code {
 /* ── LAYOUT WRAPPER ── */
 .page-body {
   position: relative; z-index: 10;
-  width: 92%; max-width: 1280px;
+  width: 95%; max-width: 1600px;
   margin: 0 auto;
   padding-bottom: 40px;
 }
@@ -388,7 +388,7 @@ code {
   position: relative; z-index: 10;
 }
 .footer-inner {
-  width: 92%; max-width: 1280px; margin: 0 auto;
+  width: 95%; max-width: 1600px; margin: 0 auto;
 }
 .footer-grid {
   display: grid;

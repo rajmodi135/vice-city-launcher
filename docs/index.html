@@ -17,7 +17,10 @@
     /* ── HERO ── */
     .hero-section {
       padding: clamp(60px, 12vw, 120px) 0 clamp(50px, 8vw, 80px);
-      text-align: center;
+      text-align: left;
+      max-width: 680px;
+      margin-left: 0;
+      margin-right: auto;
     }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
@@ -46,17 +49,17 @@
     }
     .hero-sub {
       color: var(--text-soft); font-size: clamp(15px, 2vw, 18px);
-      max-width: 680px; margin: 0 auto 36px;
+      max-width: 680px; margin: 0 0 36px 0;
       line-height: 1.7; animation: fadeDrop .7s ease .2s both;
     }
 
     /* Stat counters */
     .hero-stats {
-      display: flex; justify-content: center; gap: clamp(16px, 4vw, 48px);
+      display: flex; justify-content: flex-start; gap: clamp(16px, 4vw, 48px);
       flex-wrap: wrap; margin-bottom: 44px;
       animation: fadeDrop .7s ease .3s both;
     }
-    .hero-stat { text-align: center; }
+    .hero-stat { text-align: left; }
     .hero-stat-num {
       font-family: var(--font-display); font-size: clamp(22px, 4vw, 34px);
       font-weight: 900; display: block; line-height: 1;
@@ -71,11 +74,11 @@
 
     /* CTA block */
     .cta-stack {
-      display: flex; flex-direction: column; align-items: center; gap: 18px;
+      display: flex; flex-direction: column; align-items: flex-start; gap: 18px;
       animation: fadeDrop .7s ease .35s both;
     }
     .cta-row {
-      display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+      display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-start;
     }
 
     /* ── QUICK DL STRIP ── */
