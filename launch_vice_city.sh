@@ -33,9 +33,10 @@ log_step()    { echo -e "\n  ${BOLD}${YELLOW}▶ $1${RESET}"; }
 log_launch()  { echo -e "  ${BOLD}${PURPLE}🚀 $1${RESET}"; }
 
 # ── Configuration & Paths ──────────────────────────────────────────────
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WINEPREFIX_DIR="${HOME}/.local/share/wineprefixes/gta-vice-city"
 GAME_DIR="${WINEPREFIX_DIR}/drive_c/Program Files/GTA Vice City"
-TRAINER_SCRIPT="${HOME}/Documents/Data/vice_cheats_trainer.py"
+TRAINER_SCRIPT="${SCRIPT_DIR}/vice_cheats_trainer.py"
 PLAY_URL="https://rajmodi135.github.io/vice-city-launcher/game/index.html"
 
 # ── Main Entry ─────────────────────────────────────────────────────────
