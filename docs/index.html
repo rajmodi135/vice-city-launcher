@@ -17,10 +17,22 @@
     /* ── HERO ── */
     .hero-section {
       padding: clamp(60px, 12vw, 120px) 0 clamp(50px, 8vw, 80px);
+      max-width: 100%;
+    }
+    .hero-grid-split {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    @media(min-width: 992px) {
+      .hero-grid-split {
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 50px;
+      }
+    }
+    .hero-content {
       text-align: left;
-      max-width: 740px;
-      margin-left: 0;
-      margin-right: auto;
     }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
@@ -352,71 +364,77 @@
 
     <!-- ══ HERO ══ -->
     <section class="hero-section reveal">
-      <div class="hero-eyebrow">🎮 GTA Vice City Cloud Play Launcher</div>
-      <h1 class="hero-title">GTA<br>VICELAUNCHER</h1>
-      <p class="hero-sub">The ultimate GTA web launcher and virtual mobile phone mod. Load the game instantly in your browser. No console, no downloads, no PS5 required.</p>
+      <div class="hero-grid-split">
+        <div class="hero-content">
+          <div class="hero-eyebrow">🎮 GTA Vice City Cloud Play Launcher</div>
+          <h1 class="hero-title">GTA<br>VICELAUNCHER</h1>
+          <p class="hero-sub">The ultimate GTA web launcher and virtual mobile phone mod. Load the game instantly in your browser. No console, no downloads, no PS5 required.</p>
 
-      <!-- Stats -->
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <span class="hero-stat-num pink" data-target="50000" data-suffix="K+">0</span>
-          <span class="hero-stat-label">Players Online</span>
-        </div>
-        <div class="hero-stat">
-          <span class="hero-stat-num cyan">100%</span>
-          <span class="hero-stat-label">Free Forever</span>
-        </div>
-        <div class="hero-stat">
-          <span class="hero-stat-num yellow">5</span>
-          <span class="hero-stat-label">PS5 Cloud Slots</span>
-        </div>
-        <div class="hero-stat">
-          <span class="hero-stat-num" style="color:var(--green)">18+</span>
-          <span class="hero-stat-label">Built-in Cheats</span>
-        </div>
-      </div>
+          <!-- Stats -->
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <span class="hero-stat-num pink" data-target="50000" data-suffix="K+">0</span>
+              <span class="hero-stat-label">Players Online</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-num cyan">100%</span>
+              <span class="hero-stat-label">Free Forever</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-num yellow">5</span>
+              <span class="hero-stat-label">PS5 Cloud Slots</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-num" style="color:var(--green)">18+</span>
+              <span class="hero-stat-label">Built-in Cheats</span>
+            </div>
+          </div>
 
-      <!-- Virtual HUD Status Widget -->
-      <div class="hud-widget" style="max-width: 400px; margin: 0 auto 32px; background: rgba(0,0,0,0.45); border: 1px solid rgba(0,240,255,0.18); padding: 18px 24px; text-align: left; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));">
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; margin-bottom: 12px;">
-          <span style="font-family: var(--font-display); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan);">System Status HUD</span>
-          <div class="hud-wanted">
-            <span class="hud-star active">★</span>
-            <span class="hud-star active">★</span>
-            <span class="hud-star active">★</span>
-            <span class="hud-star active">★</span>
-            <span class="hud-star active">★</span>
+          <!-- CTA Stack -->
+          <div class="cta-stack">
+            <a href="download.html" class="btn-mega">
+              <span class="arrow">⬇️</span>
+              DOWNLOAD VICE CITY — FREE FULL PACK
+            </a>
+            <div class="cta-row">
+              <a href="https://quenq.com/play/9fa6d40cbabd8bfc416b30fa/" class="btn btn-cyan" target="_blank">🚀 Launch Game Online</a>
+              <a href="live_event.html" class="btn btn-pink" style="animation:pulsePink 2s ease-in-out infinite;">🔥 GTA VI Cloud Event</a>
+              <a href="gta_legacy.html" class="btn btn-ghost">📖 GTA Legacy</a>
+            </div>
           </div>
         </div>
-        <div class="hud-stats-group">
-          <div class="hud-stat-item">
-            <span class="hud-stat-label">Connection</span>
-            <div class="hud-stat-bar"><div class="hud-stat-fill health" style="width: 100%;"></div></div>
-            <span style="font-family: var(--font-display); font-size: 10px; color: var(--pink); font-weight: 700;">ONLINE</span>
-          </div>
-          <div class="hud-stat-item">
-            <span class="hud-stat-label">Server Load</span>
-            <div class="hud-stat-bar"><div class="hud-stat-fill armor" style="width: 24%;"></div></div>
-            <span style="font-family: var(--font-display); font-size: 10px; color: var(--cyan); font-weight: 700;">24%</span>
-          </div>
-          <div class="hud-stat-item">
-            <span class="hud-stat-label">Ping Rate</span>
-            <div class="hud-stat-bar"><div class="hud-stat-fill stamina" style="width: 12%;"></div></div>
-            <span style="font-family: var(--font-display); font-size: 10px; color: var(--green); font-weight: 700;">12ms</span>
-          </div>
-        </div>
-      </div>
 
-      <!-- CTA Stack -->
-      <div class="cta-stack">
-        <a href="download.html" class="btn-mega">
-          <span class="arrow">⬇️</span>
-          DOWNLOAD VICE CITY — FREE FULL PACK
-        </a>
-        <div class="cta-row">
-          <a href="https://quenq.com/play/9fa6d40cbabd8bfc416b30fa/" class="btn btn-cyan" target="_blank">🚀 Launch Game Online</a>
-          <a href="live_event.html" class="btn btn-pink" style="animation:pulsePink 2s ease-in-out infinite;">🔥 GTA VI Cloud Event</a>
-          <a href="gta_legacy.html" class="btn btn-ghost">📖 GTA Legacy</a>
+        <div class="hero-aside">
+          <!-- Virtual HUD Status Widget -->
+          <div class="hud-widget" style="width: 100%; max-width: 420px; background: rgba(0,0,0,0.45); border: 1px solid rgba(0,240,255,0.18); padding: 18px 24px; text-align: left; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px)); margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; margin-bottom: 12px;">
+              <span style="font-family: var(--font-display); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan);">System Status HUD</span>
+              <div class="hud-wanted">
+                <span class="hud-star active">★</span>
+                <span class="hud-star active">★</span>
+                <span class="hud-star active">★</span>
+                <span class="hud-star active">★</span>
+                <span class="hud-star active">★</span>
+              </div>
+            </div>
+            <div class="hud-stats-group">
+              <div class="hud-stat-item">
+                <span class="hud-stat-label">Connection</span>
+                <div class="hud-stat-bar"><div class="hud-stat-fill health" style="width: 100%;"></div></div>
+                <span style="font-family: var(--font-display); font-size: 10px; color: var(--pink); font-weight: 700;">ONLINE</span>
+              </div>
+              <div class="hud-stat-item">
+                <span class="hud-stat-label">Server Load</span>
+                <div class="hud-stat-bar"><div class="hud-stat-fill armor" style="width: 24%;"></div></div>
+                <span style="font-family: var(--font-display); font-size: 10px; color: var(--cyan); font-weight: 700;">24%</span>
+              </div>
+              <div class="hud-stat-item">
+                <span class="hud-stat-label">Ping Rate</span>
+                <div class="hud-stat-bar"><div class="hud-stat-fill stamina" style="width: 12%;"></div></div>
+                <span style="font-family: var(--font-display); font-size: 10px; color: var(--green); font-weight: 700;">12ms</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
