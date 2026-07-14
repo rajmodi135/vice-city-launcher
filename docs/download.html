@@ -422,15 +422,41 @@
     const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible'); }), { threshold: 0.05 });
     document.querySelectorAll('.reveal,.reveal-fade,.reveal-zoom,.reveal-left,.reveal-right,.reveal-flip').forEach(el => obs.observe(el));
 
-    // Back to Top
+    // ── Unified Scroll Handling (Progress, Back-to-Top, Header Scrolled state, Bg Zoom Parallax) ──
+    const scrollProg = document.getElementById('scroll-prog');
     const btt = document.getElementById('btt');
-    window.addEventListener('scroll', () => btt.classList.toggle('show', scrollY > 400), { passive: true });
+    const header = document.querySelector('.site-header');
+    const bgSlides = document.querySelectorAll('.bg-slide');
 
-    // Scroll Progress
-    const sp = document.getElementById('scroll-prog');
-    window.addEventListener('scroll', () => {
-      sp.style.width = Math.min((scrollY / (document.documentElement.scrollHeight - innerHeight)) * 100, 100) + '%';
-    }, { passive: true });
+    function handleScroll() {
+      const scrollY = window.scrollY;
+      const doc = document.documentElement;
+
+      // Scroll Progress Bar
+      const pct = (scrollY / (doc.scrollHeight - doc.clientHeight)) * 100;
+      if (scrollProg) scrollProg.style.width = Math.min(pct, 100) + '%';
+
+      // Back to Top button
+      if (btt) btt.classList.toggle('show', scrollY > 400);
+
+      // Header scrolled state
+      if (header) {
+        if (scrollY > 15) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      }
+
+      // Parallax Zoom (scaled out/1.0 on top, zooms in on scroll)
+      const scale = 1.0 + (scrollY * 0.00035);
+      bgSlides.forEach(slide => {
+        slide.style.transform = `scale(${Math.min(scale, 1.25)})`;
+      });
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check on page load
 
     // Background rotation
     let bgIdx = 0, activeSlide = 1;
