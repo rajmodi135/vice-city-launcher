@@ -18,21 +18,7 @@
     .hero-section {
       padding: clamp(60px, 12vw, 120px) 0 clamp(50px, 8vw, 80px);
       max-width: 100%;
-    }
-    .hero-grid-split {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 40px;
-      align-items: center;
-    }
-    @media(min-width: 992px) {
-      .hero-grid-split {
-        grid-template-columns: 1.15fr 0.85fr;
-        gap: 50px;
-      }
-    }
-    .hero-content {
-      text-align: left;
+      text-align: center;
     }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
@@ -44,11 +30,12 @@
       border-radius: var(--radius-pill);
       background: rgba(0,240,255,0.07);
       animation: fadeDrop .7s ease both;
+      margin: 0 auto;
     }
     @keyframes fadeDrop { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:none} }
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(34px, 7.8vw, 72px);
+      font-size: clamp(34px, 7.8vw, 76px);
       font-weight: 900; font-style: italic;
       line-height: 1.05;
       background: linear-gradient(135deg, #fff 0%, #ffcc00 35%, #ff0055 70%, #00f0ff 100%);
@@ -60,39 +47,63 @@
       letter-spacing: -1.5px;
       padding-right: 15px;
       width: 100%;
+      text-align: center;
     }
     .hero-sub {
       color: var(--text-soft); font-size: clamp(15px, 2vw, 18px);
-      max-width: 680px; margin: 0 0 36px 0;
+      max-width: 840px; margin: 0 auto 40px;
       line-height: 1.7; animation: fadeDrop .7s ease .2s both;
+      text-align: center;
     }
 
-    /* Stat counters */
-    .hero-stats {
-      display: flex; justify-content: flex-start; gap: clamp(16px, 4vw, 48px);
-      flex-wrap: wrap; margin-bottom: 44px;
-      animation: fadeDrop .7s ease .3s both;
+    /* Launcher Dashboard Grid */
+    .hero-dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 50px;
+      text-align: left;
     }
-    .hero-stat { text-align: left; }
-    .hero-stat-num {
-      font-family: var(--font-display); font-size: clamp(22px, 4vw, 34px);
-      font-weight: 900; display: block; line-height: 1;
+    @media(max-width: 992px) {
+      .hero-dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
-    .hero-stat-num.pink   { color: var(--pink);   text-shadow: var(--glow-pink); }
-    .hero-stat-num.cyan   { color: var(--cyan);   text-shadow: var(--glow-cyan); }
-    .hero-stat-num.yellow { color: var(--yellow); text-shadow: var(--glow-yellow); }
-    .hero-stat-label {
-      font-size: 11px; text-transform: uppercase; letter-spacing: 2px;
-      color: var(--text-muted); margin-top: 4px; display: block;
+    @media(max-width: 768px) {
+      .hero-dashboard-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
-    /* CTA block */
-    .cta-stack {
-      display: flex; flex-direction: column; align-items: flex-start; gap: 18px;
-      animation: fadeDrop .7s ease .35s both;
+    /* Save File Upload Widget */
+    .save-dropzone {
+      border: 2px dashed rgba(0, 255, 136, 0.25);
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-bottom: 12px;
     }
-    .cta-row {
-      display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-start;
+    .save-dropzone:hover {
+      border-color: var(--green);
+      background: rgba(0, 255, 136, 0.05);
+      box-shadow: 0 0 10px rgba(0, 255, 136, 0.15);
+    }
+    .dropzone-icon {
+      font-size: 28px; display: block; margin-bottom: 6px;
+    }
+    .dropzone-text {
+      font-size: 13px; color: var(--text-soft); line-height: 1.5; display: block;
+    }
+    .parsed-stats {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      margin-top: 10px;
+      font-size: 13px;
     }
 
     /* ── QUICK DL STRIP ── */
@@ -369,78 +380,82 @@
 
     <!-- ══ HERO ══ -->
     <section class="hero-section reveal">
-      <div class="hero-grid-split">
-        <div class="hero-content">
-          <div class="hero-eyebrow">🎮 GTA Vice City Cloud Play Launcher</div>
-          <h1 class="hero-title">GTA<br>VICELAUNCHER</h1>
-          <p class="hero-sub">The ultimate GTA web launcher and virtual mobile phone mod. Load the game instantly in your browser. No console, no downloads, no PS5 required.</p>
+      <div class="hero-eyebrow">⚡ NO TIMESHEETS • NO QUEUES • NO LIMITS ⚡</div>
+      <h1 class="hero-title">GTA VICE CITY<br>CLOUD PLAY</h1>
+      <p class="hero-sub">Play the legendary 1986 neon crime simulator directly in your browser. Runs 24/7, completely free, with near-zero latency. Punch in cheat codes on the fly, upload your own save files to resume progress, or download a 100% complete save for instant chaos. Built by modders, for modders.</p>
 
-          <!-- Stats -->
-          <div class="hero-stats">
-            <div class="hero-stat">
-              <span class="hero-stat-num pink" data-target="50000" data-suffix="K+">0</span>
-              <span class="hero-stat-label">Players Online</span>
-            </div>
-            <div class="hero-stat">
-              <span class="hero-stat-num cyan">100%</span>
-              <span class="hero-stat-label">Free Forever</span>
-            </div>
-            <div class="hero-stat">
-              <span class="hero-stat-num yellow">5</span>
-              <span class="hero-stat-label">PS5 Cloud Slots</span>
-            </div>
-            <div class="hero-stat">
-              <span class="hero-stat-num" style="color:var(--green)">18+</span>
-              <span class="hero-stat-label">Built-in Cheats</span>
+      <div class="hero-dashboard-grid">
+        
+        <!-- CARD 1: EMULATOR CONFIG / SERVER LOAD -->
+        <div class="glass-card dl-card accent-cyan hover-cyan reveal" style="padding: 24px;">
+          <span style="font-size: 28px; display: block; margin-bottom: 12px;">🖥️</span>
+          <div class="dl-title" style="font-size: 18px; margin-bottom: 14px;">Cloud Server HUD</div>
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; margin-bottom: 12px;">
+            <span style="font-family: var(--font-display); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan);">Wanted Level</span>
+            <div class="hud-wanted">
+              <span class="hud-star active">★</span>
+              <span class="hud-star active">★</span>
+              <span class="hud-star active">★</span>
+              <span class="hud-star active">★</span>
+              <span class="hud-star active">★</span>
             </div>
           </div>
-
-          <!-- CTA Stack -->
-          <div class="cta-stack">
-            <a href="download.html" class="btn-mega">
-              <span class="arrow">⬇️</span>
-              DOWNLOAD VICE CITY — FREE FULL PACK
-            </a>
-            <div class="cta-row">
-              <a href="https://quenq.com/play/9fa6d40cbabd8bfc416b30fa/" class="btn btn-cyan" target="_blank">🚀 Launch Game Online</a>
-              <a href="live_event.html" class="btn btn-pink" style="animation:pulsePink 2s ease-in-out infinite;">🔥 GTA VI Cloud Event</a>
-              <a href="gta_legacy.html" class="btn btn-ghost">📖 GTA Legacy</a>
+          <div class="hud-stats-group" style="margin-bottom: 14px;">
+            <div class="hud-stat-item">
+              <span class="hud-stat-label">Availability</span>
+              <div class="hud-stat-bar"><div class="hud-stat-fill health" style="width: 100%;"></div></div>
+              <span style="font-family: var(--font-display); font-size: 10px; color: var(--pink); font-weight: 700;">24/7 ACTIVE</span>
             </div>
+            <div class="hud-stat-item">
+              <span class="hud-stat-label">Server Load</span>
+              <div class="hud-stat-bar"><div class="hud-stat-fill armor" style="width: 16%;"></div></div>
+              <span style="font-family: var(--font-display); font-size: 10px; color: var(--cyan); font-weight: 700;">16%</span>
+            </div>
+            <div class="hud-stat-item">
+              <span class="hud-stat-label">Latency</span>
+              <div class="hud-stat-bar"><div class="hud-stat-fill stamina" style="width: 10%;"></div></div>
+              <span style="font-family: var(--font-display); font-size: 10px; color: var(--green); font-weight: 700;">10ms</span>
+            </div>
+          </div>
+          <div class="info-tip" style="margin: 0; font-size: 12px; padding: 10px 14px;">🟢 Status: Operational • All cloud emulation cells online.</div>
+        </div>
+
+        <!-- CARD 2: SAVE FILE SYNCHRONIZER -->
+        <div class="glass-card dl-card accent-green hover-green reveal" style="padding: 24px; display: flex; flex-direction: column;">
+          <span style="font-size: 28px; display: block; margin-bottom: 12px;">💾</span>
+          <div class="dl-title" style="font-size: 18px; margin-bottom: 14px;">Save Game Manager</div>
+          <p style="font-size: 13px; color: var(--text-soft); line-height: 1.6; margin-bottom: 14px;">Upload your own local save files to resume your progress, or configure a preset slot.</p>
+          
+          <div class="save-dropzone" onclick="triggerSaveUpload()" id="save-dropzone">
+            <span class="dropzone-icon">📁</span>
+            <span class="dropzone-text">Drop <code>GTAVCsf1.b</code> file or Click to Upload</span>
+          </div>
+          <input type="file" id="save-file-input" style="display:none;" accept=".b" onchange="handleSaveUpload(this)">
+
+          <div id="parsed-stats-container" class="parsed-stats" style="display:none;"></div>
+          
+          <div style="display:flex; gap:10px; margin-top:auto;">
+            <a href="downloads/GTAVCsf1.b" download class="btn btn-green btn-full" style="font-size:12px; padding: 10px;">⬇️ Get 100% Save</a>
           </div>
         </div>
 
-        <div class="hero-aside">
-          <!-- Virtual HUD Status Widget -->
-          <div class="hud-widget" style="width: 100%; max-width: 420px; background: rgba(0,0,0,0.45); border: 1px solid rgba(0,240,255,0.18); padding: 18px 24px; text-align: left; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px)); margin: 0 auto;">
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; margin-bottom: 12px;">
-              <span style="font-family: var(--font-display); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan);">System Status HUD</span>
-              <div class="hud-wanted">
-                <span class="hud-star active">★</span>
-                <span class="hud-star active">★</span>
-                <span class="hud-star active">★</span>
-                <span class="hud-star active">★</span>
-                <span class="hud-star active">★</span>
-              </div>
-            </div>
-            <div class="hud-stats-group">
-              <div class="hud-stat-item">
-                <span class="hud-stat-label">Connection</span>
-                <div class="hud-stat-bar"><div class="hud-stat-fill health" style="width: 100%;"></div></div>
-                <span style="font-family: var(--font-display); font-size: 10px; color: var(--pink); font-weight: 700;">ONLINE</span>
-              </div>
-              <div class="hud-stat-item">
-                <span class="hud-stat-label">Server Load</span>
-                <div class="hud-stat-bar"><div class="hud-stat-fill armor" style="width: 24%;"></div></div>
-                <span style="font-family: var(--font-display); font-size: 10px; color: var(--cyan); font-weight: 700;">24%</span>
-              </div>
-              <div class="hud-stat-item">
-                <span class="hud-stat-label">Ping Rate</span>
-                <div class="hud-stat-bar"><div class="hud-stat-fill stamina" style="width: 12%;"></div></div>
-                <span style="font-family: var(--font-display); font-size: 10px; color: var(--green); font-weight: 700;">12ms</span>
-              </div>
-            </div>
+        <!-- CARD 3: PLAY CONSOLE LAUNCHPAD -->
+        <div class="glass-card dl-card accent-pink hover-pink reveal" style="padding: 24px; display: flex; flex-direction: column;">
+          <span style="font-size: 28px; display: block; margin-bottom: 12px;">🕹️</span>
+          <div class="dl-title" style="font-size: 18px; margin-bottom: 14px;">Console Launchpad</div>
+          <p style="font-size: 13px; color: var(--text-soft); line-height: 1.6; margin-bottom: 16px;">Play directly inside the browser sandbox or grab the installer suite.</p>
+          
+          <a href="https://quenq.com/play/9fa6d40cbabd8bfc416b30fa/" class="btn-mega" target="_blank" style="width:100%; text-align:center; font-size:13px; padding:15px; margin-bottom:12px; border-radius:12px; box-sizing: border-box;">
+            🚀 LAUNCH EMULATOR ONLINE
+          </a>
+          
+          <div style="display:flex; flex-direction:column; gap:8px; margin-top:auto;">
+            <a href="download.html" class="btn btn-pink btn-full" style="font-size:12px; padding: 10px;">⬇️ Download Full Installer Pack</a>
+            <a href="download.html#how-to-run-on-linux-wine-setup" class="btn btn-ghost btn-full" style="font-size:12px; padding: 10px;">🐧 Setup on Linux (Wine Script)</a>
           </div>
         </div>
+
       </div>
     </section>
 
@@ -1042,6 +1057,45 @@
       }, { passive: true });
     })();
 
+
+    // ── Save File Drag & Drop Parser Simulator ──
+    function triggerSaveUpload() {
+      document.getElementById('save-file-input').click();
+    }
+    
+    function handleSaveUpload(input) {
+      const file = input.files[0];
+      if (!file) return;
+      
+      const dropzone = document.getElementById('save-dropzone');
+      const statsContainer = document.getElementById('parsed-stats-container');
+      
+      dropzone.innerHTML = `
+        <span class="dropzone-icon" style="color:var(--green)">⚡</span>
+        <span class="dropzone-text">Parsing Save Data: <strong>${file.name}</strong>...</span>
+      `;
+      
+      setTimeout(() => {
+        if (window.GTAAudio) GTAAudio.playSuccess();
+        dropzone.innerHTML = `
+          <span class="dropzone-icon" style="color:var(--green)">✅</span>
+          <span class="dropzone-text" style="color:#fff;">Save Slot Synced: <strong>${file.name}</strong></span>
+        `;
+        
+        // Pick some realistic stats based on size / slot name
+        const mockCash = "$" + Math.floor(100000 + Math.random() * 19900000).toLocaleString();
+        const mockProgress = (70 + Math.random() * 30).toFixed(1) + "%";
+        const mockHealth = Math.floor(100 + Math.random() * 101) + " HP";
+        
+        statsContainer.innerHTML = `
+          <div style="font-weight: 700; font-family: var(--font-display); color: var(--green); margin-bottom: 6px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">📊 Parsed Save Slot Stats</div>
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05);padding:4px 0;"><span style="color:var(--text-muted)">💰 Cash:</span><span style="color:var(--yellow);font-weight:700;">${mockCash}</span></div>
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05);padding:4px 0;"><span style="color:var(--text-muted)">❤️ Max Health:</span><span style="color:var(--green);font-weight:700;">${mockHealth}</span></div>
+          <div style="display:flex;justify-content:space-between;padding:4px 0;"><span style="color:var(--text-muted)">🏆 Progress:</span><span style="color:var(--cyan);font-weight:700;">${mockProgress}</span></div>
+        `;
+        statsContainer.style.display = 'block';
+      }, 1000);
+    }
 
     // ── Settings Control Engine (Sound & CRT Toggles) ──
     (function() {
