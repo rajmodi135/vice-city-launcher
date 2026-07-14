@@ -301,6 +301,42 @@
         </div>
       </div>
 
+      <!-- LINUX EMULATOR INSTALLER CARD (full width) -->
+      <div class="glass-card dl-card dl-card-full accent-cyan hover-cyan reveal" style="margin-bottom: 24px;">
+        <div class="dl-card-inner-row">
+          <div>
+            <span class="dl-icon">🐧</span>
+            <div class="dl-title">Linux Wine Emulator Installer &amp; Wrapper</div>
+            <div class="dl-tags">
+              <span class="dl-tag" style="color:var(--cyan);border-color:rgba(0,240,255,.4)">Linux Script</span>
+              <span class="dl-tag" style="color:var(--pink);border-color:rgba(255,0,85,.4)">Wine / Proton</span>
+              <span class="dl-tag" style="color:var(--text-muted);border-color:rgba(255,255,255,.15)">15 KB</span>
+            </div>
+            <p class="dl-desc">Play GTA Vice City natively on Linux (Ubuntu, Debian, Fedora, Arch) with high-performance DXVK graphics mapping. This script automates configuring Wine prefix wrappers, installing audio patches, setting up controller bindings, and generating a custom desktop icon using the launcher logo.</p>
+            <a href="downloads/install_gta_linux.sh" download class="btn btn-cyan btn-full" style="max-width:380px;padding:15px 30px;font-size:13px;">
+              🐧 Download Linux Installer Script
+            </a>
+          </div>
+          <div>
+            <div class="bundle-files" style="background:rgba(0,0,0,0.3);border-color:rgba(0,240,255,0.15);">
+              <div class="bundle-file-row">
+                <span style="color:var(--cyan);min-width:100px;font-weight:700;">⚙️ Command 1:</span>
+                <span class="bundle-file-name" style="font-family:monospace;color:var(--text-soft)">chmod +x install_gta_linux.sh</span>
+              </div>
+              <div class="bundle-file-row">
+                <span style="color:var(--cyan);min-width:100px;font-weight:700;">⚙️ Command 2:</span>
+                <span class="bundle-file-name" style="font-family:monospace;color:var(--text-soft)">./install_gta_linux.sh</span>
+              </div>
+              <div class="bundle-file-row">
+                <span style="color:var(--text-muted);min-width:100px;font-weight:700;">📁 Destination:</span>
+                <span class="bundle-file-name" style="color:var(--text-muted)">~/.local/share/wineprefixes/gta-vice-city/</span>
+              </div>
+            </div>
+            <div class="info-tip" style="margin-top:10px;">💡 Tip: Runs with full native Linux graphics card acceleration and automatic controller support. Make sure to download the torrent first to obtain your game folder!</div>
+          </div>
+        </div>
+      </div>
+
       <!-- DEFINITIVE EDITION MODS & MULTIPLAYER CARD (full width) -->
       <div class="glass-card dl-card dl-card-full accent-pink hover-pink reveal">
         <div class="dl-card-inner-row">
@@ -420,6 +456,31 @@
       </div>
     </section>
 
+    <!-- ══ HOW TO RUN ON LINUX ══ -->
+    <section class="how-section reveal">
+      <h2 class="sec-title">How to Run on Linux (Wine Setup)</h2>
+      <div class="how-grid">
+        <div class="how-card reveal">
+          <div class="how-step-num">01</div>
+          <span class="how-step-icon">🐧</span>
+          <div class="how-step-title">Get the Script</div>
+          <p class="how-step-desc">Download <code>install_gta_linux.sh</code> from the button above. Open your Linux terminal where the file was saved.</p>
+        </div>
+        <div class="how-card reveal">
+          <div class="how-step-num">02</div>
+          <span class="how-step-icon">⚙️</span>
+          <div class="how-step-title">Run the Installer</div>
+          <p class="how-step-desc">Run <code>chmod +x install_gta_linux.sh && ./install_gta_linux.sh</code> in the terminal to configure Wine and directories.</p>
+        </div>
+        <div class="how-card reveal">
+          <div class="how-step-num">03</div>
+          <span class="how-step-icon">🎮</span>
+          <div class="how-step-title">Copy Files &amp; Play</div>
+          <p class="how-step-desc">Copy your downloaded game files to <code>~/.local/share/wineprefixes/gta-vice-city/drive_c/Program Files/GTA Vice City/</code> and double click the Desktop icon!</p>
+        </div>
+      </div>
+    </section>
+
   </div>
 
   <!-- ══ FOOTER ══ -->
@@ -436,6 +497,7 @@
             <li><a href="downloads/Grand-Theft-Auto-Vice-City.torrent" download>🧲 Torrent File</a></li>
             <li><a href="downloads/GTAVCsf1.b" download>💾 Save File (100%)</a></li>
             <li><a href="downloads/vice-city-cloud-mobile-trainer.zip" download>🌐 Browser Extension</a></li>
+            <li><a href="downloads/install_gta_linux.sh" download>🐧 Linux Installer Script</a></li>
             <li><a href="downloads/Vice-City-Complete-Pack.zip" download>🎁 Complete Bundle</a></li>
           </ul>
         </div>
